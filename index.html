@@ -1,6 +1,17 @@
-<button onclick="highlight()">Links3.1</button>
+<button onclick="highlight()">Links4</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+window.onload = codeAddress;
+function codeAddress() {
+    setTimeout(function() {
+		document.getElementsByClassName("gsc-search-button")[0].addEventListener("click", newVideo);
+	}, 500);
+}
+
+function newVideo() {
+	highlight();
+}
+
 function highlight() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var link = index[1].innerHTML;
