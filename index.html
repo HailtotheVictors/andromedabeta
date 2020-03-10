@@ -57,10 +57,16 @@ function initialize(){
         updateTimerDisplay();
         updateProgressBar();
     }, 1000)
+}
 
+function updateTimerDisplay(){
+    // Update current time text display.
+    var now = $('#current-time').text(player.getCurrentTime()));
+    var len = $('#duration').text(player.getDuration());
+	console.log(now + "|" + len);
 }
 </script>
-<button onclick="highlight()">Links4.3</button>
+<button onclick="highlight()">Links4.5</button>
 <button onclick="mettwo()">API1</button>
 <div class="gcse-search"></div>
 <div id="ytcont">
