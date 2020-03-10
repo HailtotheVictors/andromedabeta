@@ -46,7 +46,7 @@ function initialize(){
 
     // Update the controls on load
     updateTimerDisplay();
-    updateProgressBar();
+    //updateProgressBar();
 
     // Clear any old interval.
     clearInterval(time_update_interval);
@@ -55,7 +55,7 @@ function initialize(){
     // the elapsed part of the progress bar every second.
     time_update_interval = setInterval(function () {
         updateTimerDisplay();
-        updateProgressBar();
+        //updateProgressBar();
     }, 1000)
 }
 
