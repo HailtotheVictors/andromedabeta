@@ -49,7 +49,9 @@ function initialize(){
     //updateProgressBar();
 
     // Clear any old interval.
-    clearInterval(time_update_interval);
+    if (time_update_interval !== undefined) {
+		clearInterval(time_update_interval);
+	}
 
     // Start interval to update elapsed time display and
     // the elapsed part of the progress bar every second.
@@ -66,7 +68,7 @@ function updateTimerDisplay(){
 	console.log(now + "|" + len);
 }
 </script>
-<button onclick="highlight()">Links4.8</button>
+<button onclick="highlight()">Links4.9</button>
 <button onclick="mettwo()">API1</button>
 <div class="gcse-search"></div>
 <div id="ytcont">
