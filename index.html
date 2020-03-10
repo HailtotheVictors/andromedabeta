@@ -26,8 +26,8 @@ function highlight() {
 	}, 100);
 }
 
+var player;
 function mettwo() {
-	var player;
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
@@ -61,8 +61,8 @@ function initialize(){
 
 function updateTimerDisplay(){
     // Update current time text display.
-    var now = $('#current-time').text(player.getCurrentTime());
-    var len = $('#duration').text(player.getDuration());
+    var now = player.getCurrentTime();
+    var len = player.getDuration();
 	console.log(now + "|" + len);
 }
 </script>
