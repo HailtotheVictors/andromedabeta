@@ -1,4 +1,4 @@
-<button onclick="highlight()">Links4.2</button>
+<button onclick="highlight()">Links4.3</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 window.onload = codeAddress;
@@ -19,6 +19,10 @@ function highlight() {
 	var code = link.substring(start + 1,link.length);
 	$("#phyyt").remove();
 	$('<iframe id="phyyt" width="420" height="315" frameborder="0" allowfullscreen></iframe>').attr("src", "https://www.youtube.com/embed/" + code).appendTo("#ytcont");
+	var repeat = setInterval(function() {
+		var videlem = document.getElementById("phyyt");
+		console.log(videlem.currentTime);
+	}, 100);
 }
 </script>
 <script async src="https://cse.google.com/cse.js?cx=010448235055792414413:bd55esbdtnq"></script>
