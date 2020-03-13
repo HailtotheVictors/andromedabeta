@@ -56,9 +56,19 @@ function updateTimerDisplay(){
     var len = player.getDuration();
 	console.log(now + "|" + len);
 }
+
+function findSong() {
+	var searchinput = document.getElementsByClassName("gsc-input")[0];
+	var searchbutton = document.getElementsByClassName("gsc-searchbutton")[0];
+	var query = document.getElementById("buscar").value;
+	searchinput.value = query;
+	searchbutton.click();
+	mettwo();
+}
 </script>
-<button onclick="highlight()">Links5.0</button>
+<button onclick="highlight()">Links6.0</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
+<input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
 <div class="gcse-search"></div>
 <div id="video-placeholder"></div>
