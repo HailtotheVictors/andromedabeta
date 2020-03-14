@@ -3,8 +3,17 @@
 <script async src="https://cse.google.com/cse.js?cx=010448235055792414413:bd55esbdtnq"></script>
 <script>
 var firstCustom = true;
-
 var player;
+
+function findSong() {
+	var searchinput = document.getElementsByName("search")[0];
+	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
+	var query = document.getElementById("buscar").value;
+	searchinput.value = query;
+	searchbutton.click();
+	setTimeout(function() { mettwo(); }, 1200);
+}
+
 function mettwo() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var link = index[1].innerHTML;
@@ -20,6 +29,7 @@ function mettwo() {
 				onReady: initialize
 			}
 		});
+		firstCustom = false;
 	} else {
 		player.loadVideoById(code);
 	}
@@ -40,17 +50,8 @@ function updateTimerDisplay() {
     var now = player.getCurrentTime();
     var len = player.getDuration();
 }
-
-function findSong() {
-	var searchinput = document.getElementsByName("search")[0];
-	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
-	var query = document.getElementById("buscar").value;
-	searchinput.value = query;
-	searchbutton.click();
-	setTimeout(function() { mettwo(); }, 1200);
-}
 </script>
-<button onclick="highlight()">Links7.4.1</button>
+<button onclick="highlight()">Links7.5</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
