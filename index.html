@@ -35,7 +35,8 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
-	document.getElementById("pic").src = "https://img.youtube.com/vi/" + code + "/0.jpg";
+	document.getElementById("pic").backgroundImage = "https://img.youtube.com/vi/" + code + "/0.jpg";
+	console.log("src: https://img.youtube.com/vi/" + code + "/0.jpg");
 	document.getElementById("pic").classList.add("adjust");
     //document.getElementById("video-placeholder").preventDefault();
 }
@@ -59,11 +60,11 @@ function updateTimerDisplay() {
 	background-size: 134%;
 }
 </style>
-<button onclick="highlight()">Links8.0</button>
+<button onclick="highlight()">Links8.1</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
-<img height="100" width="100" src="https://hailtothevictors.github.io/andromeda/favicon_c.png" id="pic"/>
+<div style="height:100px;width:100px;background-image:url('https://hailtothevictors.github.io/andromeda/favicon_c.png')" id="pic"/>
 <div style="display:none" id="hidden">
 	<div class="gcse-search"></div>
 	<div id="video-placeholder"></div>
