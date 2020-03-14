@@ -41,6 +41,8 @@ function mettwo() {
             onReady: initialize
         }
     });
+	$("#video-placeholder")[0].src += "&autoplay=1";
+    ev.preventDefault();
 }
 
 var time_update_interval;
@@ -69,9 +71,11 @@ function findSong() {
 	setTimeout(function() { mettwo(); }, 1000);
 }
 </script>
-<button onclick="highlight()">Links6.8</button>
+<button onclick="highlight()">Links7.0</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
-<div class="gcse-search"></div>
-<div id="video-placeholder"></div>
+<div style="display:block" id="hidden">
+	<div class="gcse-search"></div>
+	<div id="video-placeholder"></div>
+</div>
