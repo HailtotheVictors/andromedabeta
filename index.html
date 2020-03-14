@@ -3,29 +3,6 @@
 <script async src="https://cse.google.com/cse.js?cx=010448235055792414413:bd55esbdtnq"></script>
 <script>
 var firstCustom = true;
-/*window.onload = codeAddress;
-function codeAddress() {
-    setTimeout(function() {
-		document.getElementsByClassName("gsc-search-button")[0].addEventListener("click", newVideo);
-	}, 500);
-}
-
-function newVideo() {
-	setTimeout(function() { highlight(); }, 500);
-}
-
-function highlight() {
-	var index = document.getElementsByClassName("gs-visibleUrl");
-	var link = index[1].innerHTML;
-	var start = link.indexOf("=");
-	var code = link.substring(start + 1,link.length);
-	$("#phyyt").remove();
-	$('<iframe id="phyyt" width="420" height="315" frameborder="0" allowfullscreen></iframe>').attr("src", "https://www.youtube.com/embed/" + code).appendTo("#ytcont");
-	var repeat = setInterval(function() {
-		var videlem = document.getElementById("phyyt");
-		console.log(videlem.currentTime);
-	}, 100);
-}*/
 
 var player;
 function mettwo() {
@@ -62,21 +39,18 @@ function initialize(){
 function updateTimerDisplay() {
     var now = player.getCurrentTime();
     var len = player.getDuration();
-	console.log(now + "|" + len);
 }
 
 function findSong() {
 	var searchinput = document.getElementsByName("search")[0];
-	console.log(searchinput);
 	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
-	console.log(searchbutton);
 	var query = document.getElementById("buscar").value;
 	searchinput.value = query;
 	searchbutton.click();
 	setTimeout(function() { mettwo(); }, 1200);
 }
 </script>
-<button onclick="highlight()">Links7.4</button>
+<button onclick="highlight()">Links7.4.1</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
