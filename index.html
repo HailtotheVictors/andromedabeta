@@ -35,6 +35,8 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
+	document.getElementById("pic").src = "https://img.youtube.com/vi/" + code + "/0.jpg";
+	document.getElementById("pic").classList.add("adjust");
     //document.getElementById("video-placeholder").preventDefault();
 }
 
@@ -52,7 +54,12 @@ function updateTimerDisplay() {
     var len = player.getDuration();
 }
 </script>
-<button onclick="highlight()">Links7.9.2</button>
+<style>
+.adjust {
+	background-size: 134%;
+}
+</style>
+<button onclick="highlight()">Links8.0</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
