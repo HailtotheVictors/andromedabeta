@@ -32,6 +32,7 @@ function mettwo() {
 	if (firstCustom == false) {
 		document.getElementById("video-placeholder").remove();
 		var vidcont = document.createElement("div").setAttribute("id","video-placeholder").setAttribute("data-ver","new");
+		delete player;
 	}
 	firstCustom = true;
 	var index = document.getElementsByClassName("gs-visibleUrl");
@@ -60,7 +61,7 @@ function initialize(){
     }, 1000)
 }
 
-function updateTimerDisplay(){
+function updateTimerDisplay() {
     var now = player.getCurrentTime();
     var len = player.getDuration();
 	console.log(now + "|" + len);
@@ -77,7 +78,7 @@ function findSong() {
 	setTimeout(function() { mettwo(); }, 1000);
 }
 </script>
-<button onclick="highlight()">Links7.2</button>
+<button onclick="highlight()">Links7.3</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
