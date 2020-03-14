@@ -35,7 +35,7 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
-	document.getElementById("pic").backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
+	document.getElementById("pic").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
 	console.log("src: https://img.youtube.com/vi/" + code + "/0.jpg");
 	document.getElementById("pic").classList.add("adjust");
     //document.getElementById("video-placeholder").preventDefault();
@@ -60,12 +60,14 @@ function updateTimerDisplay() {
 	background-size: 134%;
 }
 #pic {
-	height:100px;
-	width:100px;
+	height: 100px;
+	width: 100px;
 	background-image: url('https://hailtothevictors.github.io/andromeda/favicon_c.png');
+	background-size: 100%;
+	background-position: center;
 }
 </style>
-<button onclick="highlight()">Links8.3</button>
+<button onclick="highlight()">Links8.4</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
