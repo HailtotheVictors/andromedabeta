@@ -31,6 +31,7 @@ function mettwo() {
 		});
 		firstCustom = false;
 	} else {
+		console.log(player);
 		player.loadVideoById(code);
 		console.log(code);
 	}
@@ -52,7 +53,7 @@ function updateTimerDisplay() {
     var len = player.getDuration();
 }
 </script>
-<button onclick="highlight()">Links7.6</button>
+<button onclick="highlight()">Links7.7</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
