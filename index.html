@@ -65,7 +65,7 @@ function findSong() {
 	var query = document.getElementById("buscar").value;
 	searchinput.value = query;
 	searchbutton.click();
-	mettwo();
+	setTimeout(function() { mettwo(); }, 500);
 }
 </script>
 <button onclick="highlight()">Links6.5</button>
