@@ -36,6 +36,7 @@ function mettwo() {
         width: 600,
         height: 400,
         videoId: code,
+	autoplay: 1,
         events: {
             onReady: initialize
         }
@@ -68,7 +69,7 @@ function findSong() {
 	setTimeout(function() { mettwo(); }, 1000);
 }
 </script>
-<button onclick="highlight()">Links6.7</button>
+<button onclick="highlight()">Links6.8</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
