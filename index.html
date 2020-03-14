@@ -31,7 +31,7 @@ function mettwo() {
 		});
 		firstCustom = false;
 	} else {
-		//player.loadVideoById(code);
+		player.loadVideoById(code);
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
@@ -52,7 +52,7 @@ function updateTimerDisplay() {
     var len = player.getDuration();
 }
 </script>
-<button onclick="highlight()">Links7.9.1</button>
+<button onclick="highlight()">Links7.9.2</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
