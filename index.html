@@ -60,11 +60,12 @@ function updateTimerDisplay(){
 function findSong() {
 	var searchinput = document.getElementsByName("search")[0];
 	console.log(searchinput);
-	//var searchbutton = document.getElementsByClassName("gsc-search-button")[0];
+	var searchbutton = document.getElementsByClassName("gsc-search-button")[0];
+	console.log(searchbutton);
 	var query = document.getElementById("buscar").value;
 	searchinput.value = query;
-	//searchbutton.click();
-	//mettwo();
+	searchbutton.click();
+	mettwo();
 }
 </script>
 <button onclick="highlight()">Links6.3</button>
