@@ -59,12 +59,17 @@ function updateTimerDisplay() {
 .adjust {
 	background-size: 134%;
 }
+#pic {
+	height:100px;
+	width:100px;
+	background-image: url('https://hailtothevictors.github.io/andromeda/favicon_c.png');
+}
 </style>
-<button onclick="highlight()">Links8.1</button>
+<button onclick="highlight()">Links8.2</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
-<div style="height:100px;width:100px;background-image:url('https://hailtothevictors.github.io/andromeda/favicon_c.png')" id="pic"/>
+<div id="pic"></div>
 <div style="display:none" id="hidden">
 	<div class="gcse-search"></div>
 	<div id="video-placeholder"></div>
