@@ -60,7 +60,7 @@ function updateTimerDisplay(){
 function findSong() {
 	var searchinput = document.getElementsByName("search")[0];
 	console.log(searchinput);
-	var searchbutton = document.getElementsByClassName("gsc-search-button")[0];
+	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
 	console.log(searchbutton);
 	var query = document.getElementById("buscar").value;
 	searchinput.value = query;
@@ -68,7 +68,7 @@ function findSong() {
 	mettwo();
 }
 </script>
-<button onclick="highlight()">Links6.4</button>
+<button onclick="highlight()">Links6.5</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
