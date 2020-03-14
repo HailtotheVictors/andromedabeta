@@ -31,8 +31,8 @@ function mettwo() {
 		});
 		firstCustom = false;
 	} else {
-		player.loadVideoById(code);
-		//loadVideoById(code);
+		//player.loadVideoById(code);
+		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
     //document.getElementById("video-placeholder").preventDefault();
@@ -52,12 +52,12 @@ function updateTimerDisplay() {
     var len = player.getDuration();
 }
 </script>
-<button onclick="highlight()">Links7.9</button>
+<button onclick="highlight()">Links7.9.1</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
 <img height="100" width="100" src="https://hailtothevictors.github.io/andromeda/favicon_c.png" id="pic"/>
-<div style="display:block" id="hidden">
+<div style="display:none" id="hidden">
 	<div class="gcse-search"></div>
 	<div id="video-placeholder"></div>
 </div>
