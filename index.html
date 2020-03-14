@@ -29,25 +29,23 @@ function highlight() {
 
 var player;
 function mettwo() {
-	if (firstCustom == false) {
-		document.getElementById("video-placeholder").remove();
-		var vidcont = document.createElement("div").setAttribute("id","video-placeholder").setAttribute("data-ver","new");
-		delete player;
-	}
-	firstCustom = true;
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
-    player = new YT.Player('video-placeholder', {
-        width: 600,
-        height: 400,
-        videoId: code,
-		autoplay: 1,
-        events: {
-            onReady: initialize
-        }
-    });
+    if (firstCustom == true) {
+		player = new YT.Player('video-placeholder', {
+			width: 600,
+			height: 400,
+			videoId: code,
+			autoplay: 1,
+			events: {
+				onReady: initialize
+			}
+		});
+	} else {
+		player.loadVideoById(code);
+	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
     //document.getElementById("video-placeholder").preventDefault();
 }
@@ -75,10 +73,10 @@ function findSong() {
 	var query = document.getElementById("buscar").value;
 	searchinput.value = query;
 	searchbutton.click();
-	setTimeout(function() { mettwo(); }, 1000);
+	setTimeout(function() { mettwo(); }, 1200);
 }
 </script>
-<button onclick="highlight()">Links7.3</button>
+<button onclick="highlight()">Links7.4</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
