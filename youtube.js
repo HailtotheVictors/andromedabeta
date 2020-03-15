@@ -1,4 +1,4 @@
-var version = 5.4;
+var version = 5.5;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -225,7 +225,7 @@ function advanceSlider() {
 	if (youtube == false) {
 		runTime = audioElem.duration;
 	} else {
-		player.getDuration();
+		runTime = player.getDuration();
 	}
 	songDisplay[1].innerHTML = toMins(runTime);
 	console.log("run Time : toMins ::" + runTime + " : ");
