@@ -222,6 +222,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	color: #eee;
 	width: 100%;
+	text-align: left;
 }
 .songRow:hover {
 	cursor: pointer;
