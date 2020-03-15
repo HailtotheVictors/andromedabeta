@@ -43,6 +43,7 @@ body {
 	border-radius: 15px;
 	background-image: url("favicon.png");
 	background-size: 100%;
+	background-position: center;
 }
 .adjust {
 	background-size: 160% auto !important;
