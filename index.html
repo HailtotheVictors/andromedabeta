@@ -19,6 +19,9 @@ function mettwo() {
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
+	document.getElementById("pic").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
+	console.log("src: https://img.youtube.com/vi/" + code + "/0.jpg");
+	document.getElementById("pic").classList.add("adjust");
     if (firstCustom == true) {
 		player = new YT.Player('video-placeholder', {
 			width: 600,
@@ -35,9 +38,6 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
-	document.getElementById("pic").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
-	console.log("src: https://img.youtube.com/vi/" + code + "/0.jpg");
-	document.getElementById("pic").classList.add("adjust");
     //document.getElementById("video-placeholder").preventDefault();
 }
 
@@ -67,7 +67,7 @@ function updateTimerDisplay() {
 	background-position: center;
 }
 </style>
-<button onclick="highlight()">Links8.4</button>
+<button onclick="highlight()">Links8.5</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(69)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
