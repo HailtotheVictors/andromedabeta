@@ -351,9 +351,9 @@ function mettwo() {
 		}
 		limit++;
 	}
-	document.getElementById("title").innerHTML = vidName.substring(0,finalPos) + "...";
+	document.getElementById("nameCont").innerHTML = vidName.substring(0,finalPos) + "...";
 	if (vidName.substring(0,finalPos) == "") {
-		document.getElementById("title").innerHTML = vidName.substring(0,16) + "...";
+		document.getElementById("nameCont").innerHTML = vidName.substring(0,16) + "...";
 	}
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
