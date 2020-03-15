@@ -338,13 +338,16 @@ function searchSongs() {
 function mettwo() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var titles = document.getElementsByClassName("gs-title");
+	console.log("titles: " + titles);
 	var vidName = titles[1].innerHTML.replace(/(<([^>]+)>)/ig,"");
+	console.log("vidName: " + vidName);
 	var limit = 0;
 	var finalPos = 0;
 	while (limit < vidName.length) {
 		var chara = vidName.substring(limit,limit + 1);
 		if (chara == " " && limit <= 16) {
 			finalPos = limit;
+			console.log("chara: " + chara);
 		}
 		limit++;
 	}
@@ -355,6 +358,7 @@ function mettwo() {
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
+	console.log("code: " + code);
 	document.getElementById("album").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
 	document.getElementById("album").classList.add("adjust");
     if (firstCustom == true) {
