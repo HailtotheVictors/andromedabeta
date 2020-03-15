@@ -1,4 +1,4 @@
-var version = "3.0.0";
+var version = "6.0";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -235,11 +235,9 @@ function advanceSlider() {
 			currentTime = audioElem.currentTime;
 		} else {
 			currentTime = player.getCurrentTime();
-			console.log("currentTime:runTime::" + currentTime + ":" + runTime);
 		}
 		rangeElem.value = currentTime / runTime * 100;
 		if (Math.round(currentTime) == runTime) {
-			console.log('Song is Done');
 			randomSong();
 			clearInterval(sliderRun);
 		}
@@ -325,6 +323,7 @@ function toggleSearch() {
 		var index = document.getElementsByClassName("control");
 		var box = document.getElementById("search");
 		box.style.display = "none";
+		box.value = "";
 		for (var i = 0; i < 3; i++) {
 			index[i + 4].style.display = "block";
 		}
@@ -365,6 +364,7 @@ function mettwo() {
 	if (vidName.substring(0,finalPos) == "") {
 		document.getElementById("nameCont").innerHTML = vidName.substring(0,16) + "...";
 	}
+	document.getElementById("descCont").innerHTML = "Playing on YouTube";
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
@@ -387,6 +387,8 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
+	playing = true;
+	forcePlay();
 	updateytMeta(vidName);
 }
 
