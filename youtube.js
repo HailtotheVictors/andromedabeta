@@ -1,4 +1,4 @@
-var version = "7.2";
+var version = "7.3";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
