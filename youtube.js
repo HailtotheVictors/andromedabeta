@@ -1,4 +1,4 @@
-var version = "7.5";
+var version = "7.6";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -216,6 +216,7 @@ function playSong(song,rewind) {
 }
 
 function advanceSlider() {
+	console.log('Advancing');
 	const rangeElem = document.getElementById("range");
 	const audioElem = document.getElementById("audio");
 	const songDisplay = document.getElementsByClassName("songTime");
@@ -362,6 +363,7 @@ function mettwo() {
 	$("#video-placeholder")[0].src += "&autoplay=1";
 	playing = true;
 	forcePlay();
+	console.log('Calling to Advance');
 	advanceSlider();
 }
 
