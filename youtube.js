@@ -1,4 +1,4 @@
-var version = 2.1;
+var version = 3.0;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -370,7 +370,7 @@ function mettwo() {
 			videoId: code,
 			autoplay: 1,
 			events: {
-				onReady: initialize
+				onReady: advanceSlider
 			}
 		});
 		firstCustom = false;
@@ -380,23 +380,6 @@ function mettwo() {
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
 	updateytMeta(vidName);
-}
-
-function initialize(){
-    updateTimerDisplay();
-	clearInterval(time_update_interval);
-    time_update_interval = setInterval(function () {
-        updateTimerDisplay();
-    }, 1000)
-}
-
-function updateTimerDisplay() {
-    var songProgress = player.getCurrentTime();
-    var songLength = player.getDuration();
-	if (songProgress >= songLength) {
-		console.log('Song is done');
-		clearInterval(time_update_interval);
-	}
 }
 
 function displayMode() {
