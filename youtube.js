@@ -1,4 +1,4 @@
-var version = "6.0";
+var version = "6.2";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -347,7 +347,7 @@ function searchSongs() {
 function mettwo() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var titles = document.getElementsByClassName("gs-title");
-	console.log("titles: " + titles);
+	console.log(titles);
 	var vidName = titles[1].innerHTML.replace(/(<([^>]+)>)/ig,"");
 	console.log("vidName: " + vidName);
 	var limit = 0;
