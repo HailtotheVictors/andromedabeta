@@ -41,6 +41,10 @@ body {
 	width: calc(100% - 40px);
 	margin: 20px;
 	border-radius: 15px;
+	background-image: url("favicon.png");
+}
+.adjust {
+	background-size: 160% auto !important;
 }
 .songTime {
 	width: 100px;
