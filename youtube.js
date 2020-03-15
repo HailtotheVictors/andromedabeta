@@ -1,4 +1,4 @@
-var version = 4.0;
+var version = 4.1;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
