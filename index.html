@@ -54,8 +54,9 @@ function updateTimerDisplay() {
     var songProgress = player.getCurrentTime();
     var songLength = player.getDuration();
 	if (songProgress >= songLength) {
-		alert('Song is done');
+		console.log('Song is done');
 	}
+	clearInterval(time_update_interval);
 }
 </script>
 <style>
@@ -70,7 +71,7 @@ function updateTimerDisplay() {
 	background-position: center;
 }
 </style>
-<button onclick="highlight()">Links8.8</button>
+<button onclick="highlight()">Links8.9</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(120)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
