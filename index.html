@@ -21,10 +21,11 @@ function mettwo() {
 	var limit = 0;
 	var finalPos = 0;
 	while (limit < vidName.length) {
-		var chara = vidName.substring(limit,limit + 1)
+		var chara = vidName.substring(limit,limit + 1);
 		if (chara == " " && limit <= 16) {
 			finalPos = limit;
 		}
+		console.log(chara + " : " + finalPos);
 		limit++;
 	}
 	document.getElementById("title").innerHTML = vidName.substring(0,finalPos - 1) + "...";
@@ -86,7 +87,7 @@ function updateTimerDisplay() {
 	font-size: 60px;
 }
 </style>
-<button onclick="highlight()">Links9.8</button>
+<button onclick="highlight()">Links9.9</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(120)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
