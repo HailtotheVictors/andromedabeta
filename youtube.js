@@ -8,6 +8,7 @@ var runTime;
 var seeSearch = false;
 var youtube = false;
 var player;
+var firstCustom = true;
 document.onkeydown = checkKey;
 navigator.mediaSession.setActionHandler('previoustrack', function() { rewind() });
 navigator.mediaSession.setActionHandler('nexttrack', function() { randomSong() });
@@ -125,9 +126,16 @@ function listSelect() {
 
 function adjustTime() {
 	var percent = document.getElementById("range").value;
-	var runTime = document.getElementById("audio").duration;
-	var newTime = percent / 100 * runTime;
-	document.getElementById("audio").currentTime = newTime;
+	if (youtube == false) {
+		var runTime = document.getElementById("audio").duration;
+		var newTime = percent / 100 * runTime;
+		document.getElementById("audio").currentTime = newTime;
+	} else {
+		var runTime = player.getDuration();
+		var newTime = percent / 100 * runTime;
+		player.seekTo(newTime);
+
+	}
 }
 
 function toMins(time) {
@@ -167,6 +175,8 @@ function rewind() {
 }
 
 function playSong(song,rewind) {
+	player.pauseVideo();
+	youtube = false;
 	const audioElem = document.getElementById("audio");
 	var playIcon = document.getElementById("play");
 	var pauseIcon = document.getElementById("pause");
@@ -202,10 +212,19 @@ function advanceSlider() {
 	const rangeElem = document.getElementById("range");
 	const audioElem = document.getElementById("audio");
 	const songDisplay = document.getElementsByClassName("songTime");
-	runTime = audioElem.duration;
+	if (youtube == false) {
+		runTime = audioElem.duration;
+	} else {
+		player.getDuration();
+	}
 	songDisplay[1].innerHTML = toMins(runTime);
 	sliderRun = setInterval(function() {
-		var currentTime = audioElem.currentTime;
+		var currentTime;
+		if (youtube == false) {
+			currentTime = audioElem.currentTime;
+		} else {
+			currentTime = player.getCurrentTime();
+		}
 		rangeElem.value = currentTime / runTime * 100;
 		if (currentTime == runTime) {
 			randomSong();
@@ -235,8 +254,13 @@ function updateMeta(song) {
 }
 
 function restartSong() {
-	document.getElementById('audio').currentTime = 0;
-	document.getElementById("audio").play();
+	if (youtube == false) {
+		document.getElementById('audio').currentTime = 0;
+		document.getElementById("audio").play();
+	} else {
+		player.seekTo(0);
+		player.playVideo();
+	}
 	playing = true;
 	advanceSlider();
 	document.getElementById("play").style.display = "none";
@@ -279,6 +303,53 @@ function toggleSearch() {
 
 function searchSongs() {
 	console.log('Searching');
+	document.getElementById("audio").pause();
+	youtube = true;
+	var searchinput = document.getElementsByName("search")[0];
+	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
+	var query = document.getElementById("search").value;
+	searchinput.value = query;
+	searchbutton.click();
+	setTimeout(function() { mettwo(); }, 1200);
+}
+
+function mettwo() {
+	var index = document.getElementsByClassName("gs-visibleUrl");
+	var titles = document.getElementsByClassName("gs-title");
+	var vidName = titles[1].innerHTML.replace(/(<([^>]+)>)/ig,"");
+	var limit = 0;
+	var finalPos = 0;
+	while (limit < vidName.length) {
+		var chara = vidName.substring(limit,limit + 1);
+		if (chara == " " && limit <= 16) {
+			finalPos = limit;
+		}
+		limit++;
+	}
+	document.getElementById("title").innerHTML = vidName.substring(0,finalPos) + "...";
+	if (vidName.substring(0,finalPos) == "") {
+		document.getElementById("title").innerHTML = vidName.substring(0,16) + "...";
+	}
+	var link = index[1].innerHTML;
+	var start = link.indexOf("=");
+	var code = link.substring(start + 1,link.length);
+	document.getElementById("pic").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
+    if (firstCustom == true) {
+		player = new YT.Player('video-placeholder', {
+			width: 600,
+			height: 400,
+			videoId: code,
+			autoplay: 1,
+			events: {
+				onReady: initialize
+			}
+		});
+		firstCustom = false;
+	} else {
+		player.loadVideoById(code);
+		loadVideoById(code);
+	}
+	$("#video-placeholder")[0].src += "&autoplay=1";
 }
 
 function displayMode() {
