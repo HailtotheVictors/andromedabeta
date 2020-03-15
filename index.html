@@ -29,6 +29,10 @@ function mettwo() {
 		limit++;
 	}
 	document.getElementById("title").innerHTML = vidName.substring(0,finalPos) + "...";
+	if (vidName.substring(0,finalPos) == "") {
+		document.getElementById("title").innerHTML = vidName.substring(0,16) + "...";
+	}
+	//get video id
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
@@ -88,7 +92,7 @@ function updateTimerDisplay() {
 	font-size: 60px;
 }
 </style>
-<button onclick="highlight()">Links10.1</button>
+<button onclick="highlight()">Links10.2</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(120)">Move</button>
 <button onclick="player.playVideo()">Play</button>
