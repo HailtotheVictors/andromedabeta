@@ -189,7 +189,8 @@ function playSong(song,rewind) {
 			playing = true;
 			playIcon.style.display = "none";
 			pauseIcon.style.display = "block";
-			document.getElementById("album").src = "https://hailtothevictors.github.io/andromeda/" + songInfo[currentPlaylist][song][3];
+			document.getElementById("album").style.backgroundImage = "url('https://hailtothevictors.github.io/andromeda/" + songInfo[currentPlaylist][song][3] + "')";
+			document.getElementById("album").classList.remove("adjust");
 			document.getElementById("nameCont").innerHTML = songInfo[currentPlaylist][song][1];
 			document.getElementById("descCont").innerHTML = songInfo[currentPlaylist][song][2] + " | " + songInfo[currentPlaylist][song][4];
 			if (rewind == false) {
@@ -333,7 +334,8 @@ function mettwo() {
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
-	document.getElementById("pic").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
+	document.getElementById("album").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
+	document.getElementById("album").classList.add("adjust");
     if (firstCustom == true) {
 		player = new YT.Player('video-placeholder', {
 			width: 600,
