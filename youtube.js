@@ -1,4 +1,4 @@
-var version = 4.1;
+var version = 4.2;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -139,7 +139,7 @@ function adjustTime() {
 		runTime = player.getDuration();
 		console.log("runtime: " + runTime);
 		newTime = percent / 100 * runTime;
-		console.log("newtime: " + newTime");
+		console.log("newtime: " + newTime);
 		player.seekTo(newTime);
 
 	}
