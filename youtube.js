@@ -1,4 +1,4 @@
-var version = 5.7;
+var version = 5.8;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -238,7 +238,7 @@ function advanceSlider() {
 			console.log("currentTime:runTime::" + currentTime + ":" + runTime);
 		}
 		rangeElem.value = currentTime / runTime * 100;
-		if (currentTime == runTime) {
+		if (Math.round(currentTime) == runTime) {
 			console.log('Song is Done');
 			randomSong();
 			clearInterval(sliderRun);
