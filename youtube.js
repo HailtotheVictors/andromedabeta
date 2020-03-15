@@ -1,4 +1,4 @@
-var version = 5.2;
+var version = 5.3;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -235,7 +235,7 @@ function advanceSlider() {
 			currentTime = audioElem.currentTime;
 		} else {
 			currentTime = player.getCurrentTime();
-			console.log("currentTime: " + currentTime);
+			console.log("currentTime:runTime::" + currentTime + ":" + runTime);
 		}
 		rangeElem.value = currentTime / runTime * 100;
 		if (currentTime == runTime) {
