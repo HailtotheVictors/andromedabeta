@@ -18,20 +18,17 @@ function mettwo() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var titles = document.getElementsByClassName("gs-title");
 	var vidName = titles[1].innerHTML.replace(/(<([^>]+)>)/ig,"");
-	var partialName = "";
 	var limit = 0;
 	var finalPos = 0;
 	while (limit < vidName.length) {
 		var chara = vidName.substring(limit,limit + 1)
-		console.log(chara);
 		if (chara == " " && limit <= 16) {
 			finalPos = limit;
-			console.log('space');
 		}
-		console.log("currpos: " + finalPos);
 		limit++;
 	}
-	console.log("trimmed: " + vidName.substring(0,finalPos));
+	var trimmed = vidName.substring(0,finalPos - 1) + "...";
+	document.getElementById("title").innerHTML = trimmed;
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
@@ -85,14 +82,18 @@ function updateTimerDisplay() {
 	background-size: 100%;
 	background-position: center;
 }
+#title {
+	font-family: 'Roboto', sans-serif;
+	font-size: 60px;
+}
 </style>
-<button onclick="highlight()">Links9.6</button>
+<button onclick="highlight()">Links9.7</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(120)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
 <div id="pic"></div>
 <span id="title"></div>
-<div style="display:block" id="hidden">
+<div style="display:none" id="hidden">
 	<div class="gcse-search"></div>
 	<div id="video-placeholder"></div>
 </div>
