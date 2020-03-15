@@ -7,7 +7,7 @@ var atHome = true;
 var runTime;
 var seeSearch = false;
 var youtube = false;
-var player;
+var player = 0;
 var firstCustom = true;
 document.onkeydown = checkKey;
 navigator.mediaSession.setActionHandler('previoustrack', function() { rewind() });
@@ -175,7 +175,9 @@ function rewind() {
 }
 
 function playSong(song,rewind) {
-	player.pauseVideo();
+	if (player !== 0) {
+		player.pauseVideo();
+	}
 	youtube = false;
 	const audioElem = document.getElementById("audio");
 	var playIcon = document.getElementById("play");
