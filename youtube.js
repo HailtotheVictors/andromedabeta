@@ -1,4 +1,4 @@
-var version = 1.2;
+var version = 2.0;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -10,6 +10,7 @@ var seeSearch = false;
 var youtube = false;
 var player = 0;
 var firstCustom = true;
+var time_update_interval;
 document.onkeydown = checkKey;
 navigator.mediaSession.setActionHandler('previoustrack', function() { rewind() });
 navigator.mediaSession.setActionHandler('nexttrack', function() { randomSong() });
@@ -379,6 +380,23 @@ function mettwo() {
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
 	updateytMeta(vidName);
+}
+
+function initialize(){
+    updateTimerDisplay();
+	clearInterval(time_update_interval);
+    time_update_interval = setInterval(function () {
+        updateTimerDisplay();
+    }, 1000)
+}
+
+function updateTimerDisplay() {
+    var songProgress = player.getCurrentTime();
+    var songLength = player.getDuration();
+	if (songProgress >= songLength) {
+		console.log('Song is done');
+		clearInterval(time_update_interval);
+	}
 }
 
 function displayMode() {
