@@ -1,4 +1,4 @@
-var version = "6.2";
+var version = "6.3";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -337,8 +337,11 @@ function searchSongs() {
 	document.getElementById("audio").pause();
 	youtube = true;
 	var searchinput = document.getElementsByName("search")[0];
+	console.log(searchInput);
 	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
+	console.log(searchButton);
 	var query = document.getElementById("search").value;
+	console.log(query);
 	searchinput.value = query;
 	searchbutton.click();
 	setTimeout(function() { mettwo(); }, 1200);
