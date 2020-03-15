@@ -1,4 +1,4 @@
-var version = "6.7";
+var version = "6.8";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -342,8 +342,9 @@ function searchSongs() {
 	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
 	console.log(searchbutton);
 	var query = document.getElementById("search").value;
-	console.log(query);
-	searchinput.value = query;
+	console.log(document.getElementById("search"));
+	console.log("Q: " + query);
+	searchinput.value = "dance monkey";
 	searchbutton.click();
 	setTimeout(function() { mettwo(); }, 1200);
 }
