@@ -256,6 +256,25 @@ function updateMeta(song) {
 	});
 }
 
+function updateytMeta(title) {
+	var titlex = title;
+	var artistx = "Playing on YouTube";
+	var albumx = "Playing on YouTube";
+	navigator.mediaSession.metadata = new MediaMetadata({
+		title: titlex,
+		artist: artistx,
+		album: albumx,
+		artwork: [
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-96x96.png',   sizes: '96x96',   type: 'image/png' },
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-128x128.png', sizes: '128x128', type: 'image/png' },
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-256x256.png', sizes: '256x256', type: 'image/png' },
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-384x384.png', sizes: '384x384', type: 'image/png' },
+			{ src: 'https://hailtothevictors.github.io/andromeda/newicons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+		]
+	});
+}
+
 function restartSong() {
 	if (youtube == false) {
 		document.getElementById('audio').currentTime = 0;
@@ -354,6 +373,7 @@ function mettwo() {
 		loadVideoById(code);
 	}
 	$("#video-placeholder")[0].src += "&autoplay=1";
+	updateytMeta(vidName);
 }
 
 function displayMode() {
