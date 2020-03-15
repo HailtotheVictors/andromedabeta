@@ -1,4 +1,4 @@
-var version = 3.1;
+var version = 4.0;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -128,13 +128,18 @@ function listSelect() {
 
 function adjustTime() {
 	var percent = document.getElementById("range").value;
+	console.log("percent: " + percent);
+	var runTime;
+	var newTime;
 	if (youtube == false) {
-		var runTime = document.getElementById("audio").duration;
-		var newTime = percent / 100 * runTime;
+		runTime = document.getElementById("audio").duration;
+		newTime = percent / 100 * runTime;
 		document.getElementById("audio").currentTime = newTime;
 	} else {
-		var runTime = player.getDuration();
-		var newTime = percent / 100 * runTime;
+		runTime = player.getDuration();
+		console.log("runtime: " + runTime);
+		newTime = percent / 100 * runTime;
+		console.log("newtime: " + newTime");
 		player.seekTo(newTime);
 
 	}
