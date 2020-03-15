@@ -215,6 +215,14 @@ body {
 	display: flex;
 	text-align: left !important;
 }
+#version {
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	color: #eee;
+	width: 100%;
+}
 .songRow:hover {
 	cursor: pointer;
 }
