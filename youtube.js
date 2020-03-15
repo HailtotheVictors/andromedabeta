@@ -1,4 +1,4 @@
-var version = "6.9";
+var version = "7.0";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -128,7 +128,6 @@ function listSelect() {
 
 function adjustTime() {
 	var percent = document.getElementById("range").value;
-	console.log("percent: " + percent);
 	var runTime;
 	var newTime;
 	if (youtube == false) {
@@ -137,9 +136,7 @@ function adjustTime() {
 		document.getElementById("audio").currentTime = newTime;
 	} else {
 		runTime = player.getDuration();
-		console.log("runtime: " + runTime);
 		newTime = percent / 100 * runTime;
-		console.log("newtime: " + newTime);
 		player.seekTo(newTime);
 
 	}
@@ -228,7 +225,6 @@ function advanceSlider() {
 		runTime = player.getDuration();
 	}
 	songDisplay[1].innerHTML = toMins(runTime);
-	console.log("run Time : toMins ::" + runTime + " : ");
 	sliderRun = setInterval(function() {
 		var currentTime;
 		if (youtube == false) {
@@ -323,7 +319,6 @@ function toggleSearch() {
 		var index = document.getElementsByClassName("control");
 		var box = document.getElementById("search");
 		box.style.display = "none";
-		box.value = "";
 		for (var i = 0; i < 3; i++) {
 			index[i + 4].style.display = "block";
 		}
@@ -333,35 +328,27 @@ function toggleSearch() {
 }
 
 function searchSongs() {
-	console.log('Searching');
 	document.getElementById("audio").pause();
 	youtube = true;
-	//var searchinput = document.getElementsByName("search")[0];
 	var searchinput = document.getElementById("gsc-i-id1");
-	console.log(searchinput);
 	var searchbutton = document.getElementsByClassName("gsc-search-button")[1];
-	console.log(searchbutton);
 	var query = document.getElementById("search").value;
-	console.log(document.getElementById("search"));
-	console.log("Q: " + query);
 	searchinput.value = "dance monkey";
 	searchbutton.click();
+	document.getElementById("search").value = "";
 	setTimeout(function() { mettwo(); }, 1200);
 }
 
 function mettwo() {
 	var index = document.getElementsByClassName("gs-visibleUrl");
 	var titles = document.getElementsByClassName("gs-title");
-	console.log(titles);
 	var vidName = titles[1].innerHTML.replace(/(<([^>]+)>)/ig,"");
-	console.log("vidName: " + vidName);
 	var limit = 0;
 	var finalPos = 0;
 	while (limit < vidName.length) {
 		var chara = vidName.substring(limit,limit + 1);
 		if (chara == " " && limit <= 16) {
 			finalPos = limit;
-			console.log("chara: " + chara);
 		}
 		limit++;
 	}
@@ -373,7 +360,6 @@ function mettwo() {
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
-	console.log("code: " + code);
 	document.getElementById("album").style.backgroundImage = "url('https://img.youtube.com/vi/" + code + "/0.jpg')";
 	document.getElementById("album").classList.add("adjust");
     if (firstCustom == true) {
