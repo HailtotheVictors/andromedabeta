@@ -27,8 +27,7 @@ function mettwo() {
 		}
 		limit++;
 	}
-	var trimmed = vidName.substring(0,finalPos - 1) + "...";
-	document.getElementById("title").innerHTML = trimmed;
+	document.getElementById("title").innerHTML = vidName.substring(0,finalPos - 1) + "...";
 	var link = index[1].innerHTML;
 	var start = link.indexOf("=");
 	var code = link.substring(start + 1,link.length);
@@ -87,12 +86,12 @@ function updateTimerDisplay() {
 	font-size: 60px;
 }
 </style>
-<button onclick="highlight()">Links9.7</button>
+<button onclick="highlight()">Links9.8</button>
 <button onclick="mettwo()">API1</button>
 <button onclick="player.seekTo(120)">Move</button>
 <input placeholder="Search" id="buscar"/><button onclick="findSong()">o</button>
 <div id="pic"></div>
-<span id="title"></div>
+<span id="title">Song Title Here</span>
 <div style="display:none" id="hidden">
 	<div class="gcse-search"></div>
 	<div id="video-placeholder"></div>
