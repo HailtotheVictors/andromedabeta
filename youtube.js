@@ -1,4 +1,4 @@
-var version = 4.4;
+var version = 5.0;
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -228,15 +228,18 @@ function advanceSlider() {
 		player.getDuration();
 	}
 	songDisplay[1].innerHTML = toMins(runTime);
+	console.log("run Time : toMins ::" + runTime + " : ");
 	sliderRun = setInterval(function() {
 		var currentTime;
 		if (youtube == false) {
 			currentTime = audioElem.currentTime;
 		} else {
 			currentTime = player.getCurrentTime();
+			console.log("currentTime: " + currentTime);
 		}
 		rangeElem.value = currentTime / runTime * 100;
 		if (currentTime == runTime) {
+			console.log('Song is Done');
 			randomSong();
 			clearInterval(sliderRun);
 		}
