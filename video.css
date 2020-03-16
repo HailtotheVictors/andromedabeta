@@ -426,3 +426,8 @@ body {
 		padding: 25px;
 	}
 }
+@media only screen and (max-width: 330px) {
+	.chooseName {
+		font-size: 18px;
+	}
+}
