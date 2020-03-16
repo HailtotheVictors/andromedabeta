@@ -336,6 +336,27 @@ body {
 		height: calc(100% - 30px);
 		padding: 15px;
 	}
+	.songRow {
+		height: 80px;
+	}
+	.albumChoose {
+		height: 70px;
+		width: 70px;
+	}
+	.chooseTont {
+		height: 80px;
+		width: calc(100% - 80px);
+	}
+	.chooseName {
+		height: 45px;
+		line-height: 45px;
+		font-size: 28px;
+	}
+	.chooseArtist {
+		height: 35px;
+		line-height: 35px;
+		font-size: 24px;
+	}
 }
 @media only screen and (max-width: 470px) {
 	#nameCont {
