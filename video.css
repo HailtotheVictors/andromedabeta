@@ -218,10 +218,11 @@ body {
 #version {
 	height: 20px;
 	line-height: 20px;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: 'Roboto', sans-serif;
 	color: #eee;
-	width: 100%;
+	width: calc(100% - 10px);
+	padding: 5px;
 	text-align: left;
 }
 .songRow:hover {
@@ -386,6 +387,12 @@ body {
 		height: 40px;
 		width: 40px;
 		margin: 5px;
+	}
+	.chooseName {
+		font-size: 20px;
+	}
+	.chooseArtist {
+		font-size: 18px;
 	}
 }
 @media only screen and (max-width: 430px) {
