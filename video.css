@@ -388,10 +388,25 @@ body {
 		width: 40px;
 		margin: 5px;
 	}
+	.songRow {
+		height: 60px;
+	}
+	.albumChoose {
+		height: 50px;
+		width: 50px;
+	}
+	.chooseTont {
+		height: 60px;
+		width: calc(100% - 60px);
+	}
 	.chooseName {
+		height: 35px;
+		line-height: 35px;
 		font-size: 20px;
 	}
 	.chooseArtist {
+		height: 25px;
+		line-height: 25px;
 		font-size: 18px;
 	}
 }
