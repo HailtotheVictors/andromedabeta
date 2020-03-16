@@ -1,4 +1,4 @@
-var version = "7.7";
+var version = "7.8";
 var playing = false;
 var currentPlaylist = 0;
 var sliderRun;
@@ -239,6 +239,7 @@ function advanceSlider() {
 			clearInterval(sliderRun);
 		}
 		songDisplay[0].innerHTML = toMins(currentTime);
+		console.log("currentTime:runTime::" + currentTime + ":" + runTime);
 	}, 50);
 }
 
