@@ -122,8 +122,8 @@ function addRandomSong() {
 }
 
 function viewPlaylist(num) {
-	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums" + playlistCovers[num];
-	console.log(playlistCovers[num]);
+	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums/" + playlistCovers[num];
+	document.getElementById("libraryAlbumName").innerHTML = decodeEntities(playlistNames[num]);
 	goTo(2);
 }
 
