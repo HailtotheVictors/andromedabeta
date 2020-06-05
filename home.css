@@ -1,4 +1,4 @@
-/*star*/
+/*planet*/
 .translucent {
 	height: 100%;
 	width: 100%;
@@ -118,7 +118,7 @@
 	border-radius: 5px;
 }
 .queueRow > div {
-	height: 80px;
+	height: 70px;
 	width: calc(100% - 70px);
 }
 .queueName, .queueArtist {
@@ -182,9 +182,26 @@
 		padding: 10px;
 	}
 	.queueName {
-		font-size: 28px;
+		font-size: 22px;
+		height: 30px;
+		line-height: 30px;
 	}
 	.queueArtist {
 		font-size: 18px;
+		height: 20px;
+		line-height: 20px;
+	}
+	.queueRow {
+		height: 50px;
+	}
+	.queueRow > img {
+		height: 40px;
+		width: 40px;
+		margin: 5px;
+		border-radius: 3px;
+	}
+	.queueRow > div {
+		height: 50px;
+		width: calc(100% - 50px);
 	}
 }
