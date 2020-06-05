@@ -158,7 +158,9 @@
 		margin-bottom: 10px;
 	}
 	#songName {
-		font-size: 32px;
+		font-size: 28px;
+		height: 40px;
+		line-height: 40px;
 	}
 	#songDesc {
 		font-size: 18px;
