@@ -2,486 +2,1147 @@
 <html>
 <head>
 	<title>Andromeda</title>
-	<link rel="shortcut icon" href="favicon_c.png"/>
-	<link rel="stylesheet" href="video.css"/>
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script async src="https://cse.google.com/cse.js?cx=010448235055792414413:bd55esbdtnq"></script>
-	<script src="https://www.youtube.com/iframe_api"></script>
-	<script src="youtube.js"></script>
-	<script src="songtest.js"></script>
+	<link rel="shortcut icon" href="favicon.png"/>
+	<link rel="stylesheet" href="styles.css"/>
+	<link rel="stylesheet" href="settings.css"/>
+	<link rel="stylesheet" href="library.css"/>
+	<link rel="stylesheet" href="home.css"/>
+	<script src="songs.js"></script>
+	<script src="script.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 </head>
-
-<body onload="document.getElementById('version').innerHTML = 'V: ' + version; randomSong()">
-
-<div style="display:none">
-	<div class="gcse-search"></div>
-	<div id="video-placeholder"></div>
-</div>
+<body onload="init()">
 
 <div id="forehead">
-	<img id="logo" src="logo2_c.png">
-	<img id="favLogo" src="favicon_c.png">
+	<img src="logo.png">
+	<img src="favicon.png">
 </div>
-
-<div id="content">
-	<div id="albumCont">
-		<div id="album"></div>
+<div id="sideBar" onmouseenter="expandNav()" onmouseleave="collapseNav()">
+	<div class="navRow" onclick="goTo(0)">
+		<svg class="navIcon"viewBox="0 0 24 24">
+			<path d="M12,3L20,9V21H15V14H9V21H4V9L12,3Z"/>
+		</svg>
+		<div class="navText">Home</div>
 	</div>
-	<div id="infoCont">
-		<div class="descPage" id="pageHome" style="display:block">
-			<div class="padding1"></div>
-			<div id="nameCont">Loading...</div>
-			<div id="descCont">Loading...</div>
-			<div style="width:100%;height:10px;"></div>
-			<div id="controlCont">
-				<div class="controlSeg">
-					<div class="control" title="Rewind" onclick="rewind()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M11.5,12L20,18V6M11,18V6L2.5,12L11,18Z"/></svg>
-					</div>
-					<div class="control" title="Play/Pause" id="pp" onclick="playPause()">
-						<svg class="controlIcon" id="play" viewBox="0 0 24 24"><path  d="M8,5.14V19.14L19,12.14L8,5.14Z"/></svg>
-						<svg class="controlIcon" style="display:none" id="pause" viewBox="0 0 24 24"><path  d="M14,19H18V5H14M6,19H10V5H6V19Z"/></svg>
-					</div>
-					<div class="control" title="Next Song" onclick="randomSong()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z"/></svg>
-					</div>
-					<div class="control" title="Restart Song" onclick="restartSong()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M12,5V1L7,6L12,11V7A6,6 0 0,1 18,13A6,6 0 0,1 12,19A6,6 0 0,1 6,13H4A8,8 0 0,0 12,21A8,8 0 0,0 20,13A8,8 0 0,0 12,5Z"/></svg>
+	<div class="navRow" onclick="goTo(1)">
+		<svg class="navIcon"viewBox="0 0 24 24">
+			<path d="M4,6H2V20A2,2 0 0,0 4,22H18V20H4M18,7H15V12.5A2.5,2.5 0 0,1 12.5,15A2.5,2.5 0 0,1 10,12.5A2.5,2.5 0 0,1 12.5,10C13.07,10 13.58,10.19 14,10.5V5H18M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2Z"/>
+		</svg>
+		<div class="navText">Library</div>
+	</div>
+	<div class="navRow" onclick="goTo(3)">
+		<svg class="navIcon"viewBox="0 0 24 24">
+			<path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+		</svg>
+		<div class="navText">Favorites</div>
+	</div>
+	<div class="navRow" onclick="goTo(4)">
+		<svg class="navIcon"viewBox="0 0 24 24">
+			<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+		</svg>
+		<div class="navText">Settings</div>
+	</div>
+</div>
+<div id="dock"><div class="rel">
+	<input type="range" min="0" max="1" step="0.001" value="0" id="scrubBar"/>
+	<div id="bottomDock">
+		<div id="songNavIcons">
+			<svg viewBox="0 0 24 24">
+				<path d="M11.5,12L20,18V6M11,18V6L2.5,12L11,18Z"/>
+			</svg>
+			<svg viewBox="0 0 24 24">
+				<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+			</svg>
+			<svg viewBox="0 0 24 24">
+				<path d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z"/>
+			</svg>
+		</div>
+		<div id="songProgress">0:00/3:12</div>
+		<svg id="goUp" style="margin-left: auto; margin-right: 5px; order: 2;" viewBox="0 0 24 24">
+			<path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>
+		</svg>
+	</div>
+</div></div>
+<div id="botNav">
+	<svg class="botNavIcon"viewBox="0 0 24 24"  onclick="goTo(0)">
+		<path d="M12,3L20,9V21H15V14H9V21H4V9L12,3Z"/>
+	</svg>
+	<svg class="botNavIcon"viewBox="0 0 24 24"  onclick="goTo(1)">
+		<path d="M4,6H2V20A2,2 0 0,0 4,22H18V20H4M18,7H15V12.5A2.5,2.5 0 0,1 12.5,15A2.5,2.5 0 0,1 10,12.5A2.5,2.5 0 0,1 12.5,10C13.07,10 13.58,10.19 14,10.5V5H18M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2Z"/>
+	</svg>
+	<svg class="botNavIcon"viewBox="0 0 24 24"  onclick="goTo(3)">
+		<path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+	</svg>
+	<svg class="botNavIcon"viewBox="0 0 24 24"  onclick="goTo(4)">
+		<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+	</svg>
+</div>
+<div id="container">
+	<div class="card" id="home"><div class="translucent"> <!-- Music Player -->
+		<div id="mainPlayer">
+			<div id="albumSlide">
+				<img class="albumCover" src="newalbums/placeholder.png" style="box-shadow:none">
+				<img class="albumCover featuredAlbum" src="https://hailtothevictors.github.io/andromeda/albums/kind.png">
+				<img class="albumCover" src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
+			</div>
+			<div id="songName">Imagine Dragons: The Megamix</div>
+			<div id="songDesc">InanimateMashups | [Single] (2017)</div>
+			<div id="songButn">
+				<svg viewBox="0 0 24 24">
+					<path d="M12.5,3C17.15,3 21.08,6.03 22.47,10.22L20.1,11C19.05,7.81 16.04,5.5 12.5,5.5C10.54,5.5 8.77,6.22 7.38,7.38L10,10H3V3L5.6,5.6C7.45,4 9.85,3 12.5,3M10,12V22H8V14H6V12H10M18,14V20C18,21.11 17.11,22 16,22H14A2,2 0 0,1 12,20V14A2,2 0 0,1 14,12H16C17.11,12 18,12.9 18,14M14,14V20H16V14H14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24">
+					<path d="M11.5,12L20,18V6M11,18V6L2.5,12L11,18Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24">
+					<path d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24">
+					<path d="M10,12V22H8V14H6V12H10M18,14V20C18,21.11 17.11,22 16,22H14A2,2 0 0,1 12,20V14A2,2 0 0,1 14,12H16C17.11,12 18,12.9 18,14M14,14V20H16V14H14M11.5,3C14.15,3 16.55,4 18.4,5.6L21,3V10H14L16.62,7.38C15.23,6.22 13.46,5.5 11.5,5.5C7.96,5.5 4.95,7.81 3.9,11L1.53,10.22C2.92,6.03 6.85,3 11.5,3Z"/>
+				</svg>
+			</div>
+		</div>
+		<div id="verticalGrad"></div>
+		<div id="upNext">
+			<div id="queue">
+				<div id="queueText">Queue</div>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/Bad_Liar.jpg">
+					<div>
+						<div class="queueName">Bad Liar</div>
+						<div class="queueArtist">Imagine Dragons</div>
 					</div>
 				</div>
-				<div class="controlSeg">
-					<input type="text" id="search" name="song" placeholder="Search..."/>
-					<div class="control" title="Playlist" onclick="songSelect()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/></svg>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/kind.png">
+					<div>
+						<div class="queueName">Bust This Town</div>
+						<div class="queueArtist">Stereophonics</div>
 					</div>
-					<div class="control" title="Change Playlist" onclick="listSelect()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11M12,16.5C9.5,16.5 7.5,14.5 7.5,12C7.5,9.5 9.5,7.5 12,7.5C14.5,7.5 16.5,9.5 16.5,12C16.5,14.5 14.5,16.5 12,16.5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
+				</div>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/stories.jpg">
+					<div>
+						<div class="queueName">For a Better Day</div>
+						<div class="queueArtist">Avicii</div>
 					</div>
-					<div class="control" title="Light/Dark Mode" onclick="displayMode()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M12,18V6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z"/></svg>
+				</div>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/true.jpg">
+					<div>
+						<div class="queueName">You Make Me</div>
+						<div class="queueArtist">Avicii</div>
 					</div>
-					<div class="control" title="Search" onclick="toggleSearch()">
-						<svg class="controlIcon" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/></svg>
+				</div>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
+					<div>
+						<div class="queueName">Boomerang</div>
+						<div class="queueArtist">Imagine Dragons</div>
+					</div>
+				</div>
+				<div class="divider"></div>
+				<div class="queueRow">
+					<img src="https://hailtothevictors.github.io/andromeda/albums/happyliar.png">
+					<div>
+						<div class="queueName">Happy Liar</div>
+						<div class="queueArtist">Adamusic</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="descPage" id="songList"><div class="descRel">
-			<div class="closePage control" onclick="pageClose(this);">
-				<svg class="controlIcon" viewBox="0 0 24 24"><path fill="#eee" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/></svg>
+	</div></div> <!-- /Music Player -->
+	<div class="card"> <!-- Navigate Playlists -->
+		<span class="title">Music</span>
+		<div class="carousel" onscroll="checkScroll(this)">
+			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
+				<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+			</svg>
+			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
+				<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+			</svg>
+			<div class="playlist" style="background-image:url('playlists/musica.png')" onclick="viewPlaylist(0)">
+				<svg viewBox="0 0 24 24">
+					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(0)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Bad_Liar.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Bad Liar</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="playlist" style="background-image:url('playlists/imaginedragons.png')" onclick="viewPlaylist(1)">
+				<svg viewBox="0 0 24 24">
+					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/avicii.png')" onclick="viewPlaylist(2)">
+				<svg viewBox="0 0 24 24">
+					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/milkychance.jpg')" onclick="viewPlaylist(3)">
+				<svg viewBox="0 0 24 24">
+					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/elli.png')" onclick="viewPlaylist(4)">
+				<svg viewBox="0 0 24 24">
+					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				</svg>
+			</div>
+			<div style="height:250px;width:20px;flex-shrink:0;"></div>
+		</div>
+		<span class="title">Shows</span>
+		<div class="carousel" onscroll="checkScroll(this)">
+			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
+				<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+			</svg>
+			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
+				<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+			</svg>
+			<div class="playlist" style="background-image:url('playlists/milo_1.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/milo_2.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/phineas_1.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/phineas_2.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/phineas_3.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div class="playlist" style="background-image:url('playlists/phineas_4.png')">
+				<svg viewBox="0 0 24 24">
+					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				</svg>
+			</div>
+			<div style="height:250px;width:20px;flex-shrink:0;"></div>
+		</div>
+	</div> <!-- /Navigate Playlists -->
+	<div class="card" style="display:none;"> <!-- playlist -->
+		<div id="libraryTop">
+			<div id="libraryAlbumCont"><img id="libraryAlbum" src="playlists/musica.png"></div>
+			<div id="libraryDescCont">
+				<span id="libraryAlbumName">M&uacute;sica</span><br>
+				<span class="libraryAlbumText">66 songs, 5 hours 6 minutes</span>
+				<div class="libraryActionBar">
+					<svg viewBox="0 0 24 24">
+						<title>Play Playlist</title>
+						<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+					</svg>
+					<svg viewBox="0 0 24 24">
+						<title>Shuffle Playlist</title>
+						<path d="M14.83,13.41L13.42,14.82L16.55,17.95L14.5,20H20V14.5L17.96,16.54L14.83,13.41M14.5,4L16.54,6.04L4,18.59L5.41,20L17.96,7.46L20,9.5V4M10.59,9.17L5.41,4L4,5.41L9.17,10.58L10.59,9.17Z"/>
+					</svg>
+					<svg viewBox="0 0 24 24" onclick="goTo(1)">
+						<title>Go Back</title>
+						<path d="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z"/>
+					</svg>
 				</div>
 			</div>
-			<div class="songRow" onclick="chooseSong(6)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/believer.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Believer</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+		</div>
+		<div class="divider"></div>
+		<div id="librarySongsCont">
+			<div class="librarySongRow" data-song="0">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Bad_Liar.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Bad Liar</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(51)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/better.png">
-				<div class="chooseTont">
-					<div class="chooseName">Better Than Ever</div>
-					<div class="chooseArtist">Flight Facilites ft. Aloe Blacc</div>
+			<div class="librarySongRow" data-song="1">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/believer.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Believer</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(30)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Bleeding Out</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="2">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/better.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Better Than Ever</span><br>
+					<span class="libraryArtist">Flight Facilites ft. Aloe Blacc</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(1)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Blossom.jpeg">
-				<div class="chooseTont">
-					<div class="chooseName">Blossom</div>
-					<div class="chooseArtist">Milky Chance</div>
+			<div class="librarySongRow" data-song="3">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Bleeding Out</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(2)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Bones.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Bones</div>
-					<div class="chooseArtist">Galantis ft. OneRepublic</div>
+			<div class="librarySongRow" data-song="4">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Blossom.jpeg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Blossom</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(32)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Boomerang</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="5">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Bones.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Bones</span><br>
+					<span class="libraryArtist">Galantis ft. OneRepublic</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(31)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Born_To_Be_Yours.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Born to Be Yours</div>
-					<div class="chooseArtist">Kygo & Imagine Dragons</div>
+			<div class="librarySongRow" data-song="6">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Boomerang</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(53)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/kind.png">
-				<div class="chooseTont">
-					<div class="chooseName">Bust This Town</div>
-					<div class="chooseArtist">Stereophonics</div>
+			<div class="librarySongRow" data-song="7">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Born_To_Be_Yours.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Born to Be Yours</span><br>
+					<span class="libraryArtist">Kygo & Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(4)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Cocoon.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Cocoon</div>
-					<div class="chooseArtist">Milky Chance</div>
+			<div class="librarySongRow" data-song="8">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/stories.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Broken Arrows</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(37)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Cool Out</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="9">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/kind.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Bust This Town</span><br>
+					<span class="libraryArtist">Stereophonics</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(5)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Demons</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="10">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/centuroots.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Centuroots</span><br>
+					<span class="libraryArtist">InanimateMashups</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(34)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/More_Than_You_Know.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Dreamer</div>
-					<div class="chooseArtist">Alwell /\ Ingrosso</div>
+			<div class="librarySongRow" data-song="11">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Blossom.jpeg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Clouds</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(28)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Blossom.jpeg">
-				<div class="chooseTont">
-					<div class="chooseName">Ego</div>
-					<div class="chooseArtist">Milky Chance</div>
+			<div class="librarySongRow" data-song="12">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Cocoon.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Cocoon</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(35)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/tim.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Fades Away</div>
-					<div class="chooseArtist">Avicii ft. Noonie Bao</div>
+			<div class="librarySongRow" data-song="13">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Cool Out</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(7)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Sadnecessary.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Flashed Junk Mind</div>
-					<div class="chooseArtist">Milky Chance</div>
+			<div class="librarySongRow" data-song="14">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Demons</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(36)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/wakingupblue.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Good Life</div>
-					<div class="chooseArtist">OneRepublic</div>
+			<div class="librarySongRow" data-song="15">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/More_Than_You_Know.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Dreamer</span><br>
+					<span class="libraryArtist">Axwell /\ Ingrosso</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(50)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/happier.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Happier</div>
-					<div class="chooseArtist">Marshmello ft. Bastille</div>
+			<div class="librarySongRow" data-song="16">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Blossom.jpeg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Ego</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(14)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/tim.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Heart Upon My Sleeve</div>
-					<div class="chooseArtist">Avicii ft. Imagine Dragons</div>
+			<div class="librarySongRow" data-song="17">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/tim.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Fades Away</span><br>
+					<span class="libraryArtist">Avicii ft. Noonie Bao</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(8)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Hey_Brother.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Hey Brother</div>
-					<div class="chooseArtist">Avicii</div>
+			<div class="librarySongRow" data-song="18">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Sadnecessary.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Flashed Junk Mind</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(9)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/The_Lumineers.jpeg">
-				<div class="chooseTont">
-					<div class="chooseName">Ho Hey</div>
-					<div class="chooseArtist">The Lumineers</div>
+			<div class="librarySongRow" data-song="19">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/stories.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">For a Better Day</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(27)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/ibetmylife.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">I Bet My Life</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="20">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/wakingupblue.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Good Life</span><br>
+					<span class="libraryArtist">OneRepublic</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(10)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/I_Need_a_Dollar.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">I Need a Dollar</div>
-					<div class="chooseArtist">Aloe Blacc</div>
+			<div class="librarySongRow" data-song="21">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/happier.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Happier</span><br>
+					<span class="libraryArtist">Marshmello ft. Bastille</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(38)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Bad_Blood.jpeg">
-				<div class="chooseTont">
-					<div class="chooseName">Icarus</div>
-					<div class="chooseArtist">Bastille</div>
+			<div class="librarySongRow" data-song="22">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/happyliar.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Happy Liar</span><br>
+					<span class="libraryArtist">Adamusic</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(15)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">I'm So Sorry</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="23">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/tim.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Heart Upon My Sleeve</span><br>
+					<span class="libraryArtist">Avicii ft. Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(48)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/itstime.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">It's Time</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="24">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/ibetmylife.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">I Bet My Life</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(52)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/itstime.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">It's Time (Acoustic)</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="25">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">I'm So Sorry</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(33)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/levelsremix.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Levels</div>
-					<div class="chooseArtist">Avicii</div>
+			<div class="librarySongRow" data-song="26">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/megamix.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Imagine Dragons: The Megamix</span><br>
+					<span class="libraryArtist">InanimateMashups</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(3)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/avici.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Lonely Together</div>
-					<div class="chooseArtist">Avicii ft. Rita Ora</div>
+			<div class="librarySongRow" data-song="27">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/itstime.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">It's Time</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(11)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Machine.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Machine</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="28">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/levelsremix.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Levels</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(39)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/More_Than_You_Know.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">More Than You Know</div>
-					<div class="chooseArtist">Axwell /\ Ingrosso</div>
+			<div class="librarySongRow" data-song="29">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/myheadisananimal.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Little Talks</span><br>
+					<span class="libraryArtist">Of Monsters and Men</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(12)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Natural.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Natural</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="30">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/avici.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Lonely Together</span><br>
+					<span class="libraryArtist">Avicii ft. Rita Ora</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(40)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/One_Foot.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">One Foot</div>
-					<div class="chooseArtist">Walk the Moon</div>
+			<div class="librarySongRow" data-song="31">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Machine.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Machine</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(13)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Only</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="32">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/More_Than_You_Know.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">More Than You Know</span><br>
+					<span class="libraryArtist">Axwell /\ Ingrosso</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(16)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Pompeii.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Pompeii</div>
-					<div class="chooseArtist">Bastille</div>
+			<div class="librarySongRow" data-song="33">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Natural.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Natural</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(29)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Polaroid</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="34">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Only</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(17)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Renegades.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Renegades</div>
-					<div class="chooseArtist">X Ambassadors</div>
+			<div class="librarySongRow" data-song="35">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Polaroid</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(45)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/evolve.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Rise Up</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="36">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Pompeii.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Pompeii</span><br>
+					<span class="libraryArtist">Bastille</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(41)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Roots.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Roots</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="37">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/radioactivestars.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Radioactive Stars</span><br>
+					<span class="libraryArtist">DylanGLC</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(42)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Shots_Broiler.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Shots</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="38">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/radioactivestarsreversed.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Radioactive Stars (Reversed)</span><br>
+					<span class="libraryArtist">DylanGLC</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(43)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Shots_Broiler.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Shots (Broiler Remix)</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="39">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Renegades.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Renegades</span><br>
+					<span class="libraryArtist">X Ambassadors</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(19)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Stolen_Dance.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Stolen Dance</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="40">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/evolve.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Rise Up</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(20)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Stolen_Dance_Flic_Flac.jfif">
-				<div class="chooseTont">
-					<div class="chooseName">Stolen Dance (Flic Flac Edit)</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="41">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Roots.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Roots</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(21)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/The_Lumineers.jpeg">
-				<div class="chooseTont">
-					<div class="chooseName">Stubborn Love</div>
-					<div class="chooseArtist">The Lumineers</div>
+			<div class="librarySongRow" data-song="42">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Shots_Broiler.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Shots</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(22)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/The_Nights.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">The Nights</div>
-					<div class="chooseArtist">Avicii</div>
+			<div class="librarySongRow" data-song="43">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Shots_Broiler.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Shots (Broiler Remix)</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(46)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/thunder.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Thunder</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="44">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Smoke and Mirrors</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(44)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Two_High.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Two High</div>
-					<div class="chooseArtist">Moon Taxi</div>
+			<div class="librarySongRow" data-song="45">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Stolen_Dance.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Stolen Dance</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(24)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Waiting_for_Love.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Waiting For Love</div>
-					<div class="chooseArtist">Avicii</div>
+			<div class="librarySongRow" data-song="46">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Stolen_Dance_Flic_Flac.jfif">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Stolen Dance (Flic Flac Edit)</span><br>
+					<span class="libraryArtist">Milky Chance</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(54)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/wakemeupalbum.png">
-				<div class="chooseTont">
-					<div class="chooseName">Wake Me Up</div>
-					<div class="chooseArtist">Avicii</div>
+			<div class="librarySongRow" data-song="47">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/stories.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Sunset Jesus</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(47)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/warriors.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Warriors</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="48">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/thedays.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">The Days</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(49)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/whateverittakes.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Whatever It Takes</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="49">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/The_Nights.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">The Nights</span><br>
+					<span class="libraryArtist">Avicii</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(23)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">West Coast</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="50">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/thunder.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Thunder</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(18)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Who We Are</div>
-					<div class="chooseArtist">Imagine Dragons</div>
+			<div class="librarySongRow" data-song="51">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Night_Visions.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Tiptoe</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="chooseSong(25)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/Men_Amongst_Mountains.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Wish I Knew You</div>
-					<div class="chooseArtist">The Revivalists</div>
+			<div class="librarySongRow" data-song="52">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Two_High.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Two High</span><br>
+					<span class="libraryArtist">Moon Taxi</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div id="version"></div>
-		</div></div>
-		<div class="descPage" id="playlists"><div class="descRel">
-			<div class="closePage control" onclick="pageClose(this);">
-				<svg class="controlIcon" viewBox="0 0 24 24"><path fill="#eee" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/></svg>
-			</div>
-			<div class="songRow" onclick="changePlaylist(0)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/q_2.png">
-				<div class="chooseTont">
-					<div class="chooseName">Quinn</div>
+			<div class="librarySongRow" data-song="53">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/vivalapompeii.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Viva la Pompeii</span><br>
+					<span class="libraryArtist">Dakota Mashups</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-			<div class="songRow" onclick="changePlaylist(1)">
-				<img class="albumChoose" src="https://hailtothevictors.github.io/andromeda/albums/elli.jpg">
-				<div class="chooseTont">
-					<div class="chooseName">Elli</div>
+			<div class="librarySongRow" data-song="54">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/vivalavidaclocks.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Viva la Vida/Clocks</span><br>
+					<span class="libraryArtist">Infinity Remix</span>
 				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
 			</div>
-		</div></div>
-	</div>
+			<div class="librarySongRow" data-song="55">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Waiting_for_Love.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Waiting for Love</span><br>
+					<span class="libraryArtist">Avicii</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="56">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/wakemeupalbum.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Wake Me Up</span><br>
+					<span class="libraryArtist">Avicii</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="57">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/walkingthewire.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Walking the Wire</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="58">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/warriorblood.png">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Warrior Blood</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="59">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/warriors.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Warriors</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="60">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Origins.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">West Coast</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="61">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/whateverittakes.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Whatever It Takes</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="62">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/avici.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Without You</span><br>
+					<span class="libraryArtist">Avicii</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="63">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/smokemirrors.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Who We Are</span><br>
+					<span class="libraryArtist">Imagine Dragons</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="64">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/Men_Amongst_Mountains.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">Wish I Knew You</span><br>
+					<span class="libraryArtist">The Revivalists</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+			<div class="librarySongRow" data-song="65">
+				<img src="https://hailtothevictors.github.io/andromeda/albums/true.jpg">
+				<div class="libraryRowTont">
+					<span class="librarySongName">You Make Me</span><br>
+					<span class="libraryArtist">Avicii</span>
+				</div>
+				<svg viewBox="0 0 24 24" onclick="playSongNow(this)">
+					<path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+				</svg>
+				<svg viewBox="0 0 24 24" onclick="addToQueueFromList(this)">
+					<path d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"/>
+				</svg>
+			</div>
+		</div>
+	</div> <!-- /playlist -->
+	
+	<div class="card" style="display:none;">Favorites</div>
+	<div class="card" style="display:none;"> <!-- Settings -->
+		<span class="sectionHeader">Settings</span><br>
+		<span class="sectionHeader">General</span><br>
+		<span class="sectionHeader">Equalizer</span><br>
+			<div class="settingsRow">
+				<span class="settingsText eqLabel">Treble:</span>
+				<input oninput="setEQ(this)" data-eqindex="0" type="range" class="eqSlider" min="-5" value="0" max="5" step="0.5"/>
+				<span class="settingsText eqOutput">0</span>
+			</div>
+			<div class="settingsRow">
+				<span class="settingsText eqLabel">Bass:</span>
+				<input oninput="setEQ(this)" data-eqindex="1" type="range" class="eqSlider" min="-5" value="0" max="5" step="0.5"/>
+				<span class="settingsText eqOutput">0</span>
+			</div>
+		<span class="sectionHeader">Version</span><br>
+		<span class="settingsText">V 4.0.0</span><br>
+		<span class="settingsText">Released 03 June 2020</span>
+	</div> <!-- / Settings -->
 </div>
-
-<div id="bottom">
-	<div class="songTime">0:00</div>
-	<div id="rangeCont">
-		<input type="range" min="0" max="100" value="50" step="0.05" id="range" oninput="adjustTime()">
-	</div>
-	<div class="songTime">0:00</div>
-</div>
-
-<audio style="display:none" id="audio" autoplay>
-	<source src="https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3" type="audio/mpeg">
-</audio>
 
 </body>
 </html>
