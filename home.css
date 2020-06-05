@@ -1,4 +1,4 @@
-/*salutations terrestrial planet*/
+/*star*/
 .translucent {
 	height: 100%;
 	width: 100%;
@@ -180,5 +180,11 @@
 		height: 30px;
 		width: 30px;
 		padding: 10px;
+	}
+	.queueName {
+		font-size: 28px;
+	}
+	.queueArtist {
+		font-size: 18px;
 	}
 }
