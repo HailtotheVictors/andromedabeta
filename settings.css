@@ -1,0 +1,57 @@
+.sectionHeader {
+	font-family: 'Roboto', sans-serif;
+	font-size: 36px;
+	color: #ccc;
+	width: auto;
+	padding: 16px;
+}
+.sectionHeader:first-of-type {
+	font-size: 40px;
+	color: #eee;
+	font-weight: bold;
+}
+.settingsText {
+	font-size: 24px;
+	color: #bbb;
+	font-family: 'Roboto', sans-serif;
+	padding: 16px;
+}
+.settingsRow {
+	height: 40px;
+	line-height: 40px;
+	display: flex;
+	width: calc(100% - 32px);
+	padding: 0 16px;
+}
+.settingsRow > .settingsText {
+	padding: 0;
+}
+.eqSlider {
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: linear-gradient(to right, var(--andro-blue), var(--andro-purple), var(--andro-magenta));
+	height: 20px;
+	margin: 10px;
+	display: inline-block;
+	border-radius: 10px;
+	width: calc(100% - 145px);
+}
+.eqSlider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background: #ccc;
+	cursor: pointer;
+	border-radius: 10px;
+}
+.eqSlider:focus {
+	outline: none;
+}
+.eqOutput {
+	width: 50px;
+	text-align: center;
+}
+.eqLabel {
+	width: 75px;
+}
