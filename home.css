@@ -1,4 +1,4 @@
-/*hello*/
+/*salutations*/
 .translucent {
 	height: 100%;
 	width: 100%;
@@ -164,17 +164,17 @@
 		line-height: 40px;
 	}
 	#songDesc {
-		font-size: 18px;
+		font-size: 20px;
 	}
 	#songButn > svg {
 		height: 40px;
 		width: 40px;
-		padding: 10px;
-		margin: 15px 5px;
+		padding: 5px;
+		margin: 10px 5px;
 	}
 	#songButn > svg:first-of-type, #songButn > svg:last-of-type {
 		height: 30px;
 		width: 30px;
-		padding: 15px;
+		padding: 10px;
 	}
 }
