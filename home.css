@@ -157,4 +157,10 @@
 	#queue {
 		margin-bottom: 10px;
 	}
+	#songName {
+		font-size: 32px;
+	}
+	#songDesc {
+		font-size: 18px;
+	}
 }
