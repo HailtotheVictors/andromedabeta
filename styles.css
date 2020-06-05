@@ -1,0 +1,315 @@
+body {
+	background-color: #333;
+	margin: 0;
+	--andro-blue: #2b6395;
+	--andro-purple: #5e2e92;
+	--andro-magenta: #9c2488;
+	--andro-hoverblue: #3b73a5;
+	--andro-hoverpurple: #6e3ea2;
+	--andro-grey: #777;
+}
+#forehead {
+	height: 60px;
+	width: 100%;
+	background-color: #222;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#forehead > img:first-of-type {
+	height: calc(100% - 6px);
+	padding: 3px;
+	display: block;
+}
+#forehead > img:last-of-type {
+	display: none;
+}
+#sideBar {
+	width: 60px;
+	height: calc(100vh - 130px);
+	background-color: #282828;
+	position: absolute;
+	top: 60px;
+	left: 0;
+	box-shadow: 8px 0 8px -5px #888888;
+	z-index: 6;
+}
+.navRow {
+	width: 100%;
+	height: 60px;
+	border-radius: 20px;
+	display: flex;
+	overflow: hidden;
+}
+.navRow:first-of-type, .botNavIcon:first-of-type {
+	fill: var(--andro-blue);
+	color: var(--andro-blue);
+}
+.navRow:nth-of-type(2), .botNavIcon:nth-of-type(2) {
+	fill: var(--andro-purple);
+	color: var(--andro-purple);
+}
+.navRow:nth-of-type(3), .botNavIcon:nth-of-type(3) {
+	fill: var(--andro-magenta);
+	color: var(--andro-magenta);
+}
+.navRow:nth-of-type(4), .botNavIcon:nth-of-type(4) {
+	fill: var(--andro-grey);
+	color: var(--andro-grey);
+}
+.navRow:hover {
+	background-color: #383838;
+	cursor: pointer;
+}
+.navIcon {
+	padding: 5px;
+	height: 50px;
+	width: 50px;
+	fill: inherit;
+	flex-shrink: 0;
+}
+.navText {
+	width: 170px;
+	color: inherit;
+	display: none;
+	font-family: 'Roboto', sans-serif;
+	line-height: 50px;
+	height: 50px;
+	padding: 5px;
+	font-weight: bold;
+	font-size: 36px;
+	opacity: 0;
+}
+#dock {
+	width: 100%;
+	height: 70px;
+	background-color: #222;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.rel {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+#botNav {
+	display: none;
+}
+.botNavIcon {
+	height: 30px;
+	width: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: calc((25% - 30px) / 2);
+	padding-right: calc((25% - 30px) / 2);
+	border-radius: 20px;
+}
+.botNavIcon:hover {
+	background-color: #383838;
+	cursor: pointer;
+}
+.title {
+	font-family: 'Roboto', sans-serif;
+	width: auto;
+	padding: 16px;
+	font-size: 32px;
+	color: #eee;
+	font-weight: bold;
+}
+#container {
+	height: calc(100vh - 130px);
+	width: calc(100vw - 60px);
+	position: absolute;
+	top: 60px;
+	left: 60px;
+}
+.carousel {
+	height: 250px;
+	width: 100%;
+	overflow-x: auto;
+	overflow-y: auto;
+	background-color: #444;
+	display: flex;
+	position: relative;
+}
+.slideCarousel {
+	position: absolute;
+	z-index: 4;
+	left: 0;
+	top: 85px;
+	height: 50px;
+	width: 50px;
+	fill: #eee;
+	background-color: #555c;
+	padding: 15px 0;
+	border-radius: 0 5px 5px 0;
+	display: none;
+}
+.slideCarousel:hover {
+	background-color: #888c;
+	cursor: pointer;
+}
+.slideCarousel:nth-of-type(2) {
+	left: calc(100% - 50px);
+	border-radius: 5px 0 0 5px;
+}
+.carousel::-webkit-scrollbar {
+	display: none;
+}
+.playlist {
+	height: 210px;
+	width: 210px;
+	margin-top: 20px;
+	margin-left: 20px;
+	border-radius: 5%;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	flex-shrink: 0;
+}
+.playlist:hover {
+	cursor: pointer;
+}
+.playlist > svg {
+	height: 70px;
+	width: 70px;
+	padding: 10px;
+	background-color: #555c;
+	border-radius: 50%;
+	fill: #eee;
+	margin-top: 60px;
+	margin-left: 60px;
+	display: none;
+}
+.playlist:hover > svg {
+	display: block;
+}
+.card {
+	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.card::-webkit-scrollbar {
+  width: 10px;
+}
+.card::-webkit-scrollbar-track {
+  background: #666;
+}
+.card::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.card::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+#bottomDock {
+	display: flex;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	position: absolute;
+	height: 60px;
+}
+#songNavIcons {
+	height: 60px;
+	width: auto;
+	overflow: hidden;
+}
+#songNavIcons > svg, #goUp {
+	height: 46px;
+	width: 46px;
+	padding: 2px;
+	background-color: #222;
+	border-radius: 50%;
+	fill: #ccc;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#songNavIcons > svg:hover, #goUp:hover {
+	background-color: #444;
+	cursor: pointer;
+}
+#songProgress {
+	font-family: 'Roboto', monospace;
+	color: #ccc;
+	height: 50px;
+	line-height: 50px;
+	padding: 5px 10px;
+	font-size: 24px;
+	width: auto;
+	text-align: center;
+	letter-spacing: 3px;
+}
+.divider {
+	height: 5px;
+	width: 100%;
+	background-image: linear-gradient(to right, var(--andro-blue), var(--andro-purple), var(--andro-magenta));
+}
+#home {
+	display:none;
+	background-image:url('https://hailtothevictors.github.io/andromeda/albums/kind.png');
+	background-size: cover;
+	background-position: center;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #scrubBar {
+		overflow: hidden;
+		-webkit-appearance: none;
+		background-color: #555;
+		margin: 0;
+		display: inline-block;
+		width: 100%;
+		position: absolute;
+		top: 0;
+    }
+    #scrubBar::-webkit-slider-thumb {
+		width: 10px;
+		-webkit-appearance: none;
+		height: 10px;
+		background: #bbb;
+		border-radius: 50%;
+		box-shadow: -5005px 0 0 5000px var(--andro-blue);
+    }
+	#scrubBar::-webkit-slider-thumb:hover {
+		cursor: pointer;
+	}
+	#scrubBar:focus {
+		outline: none;
+	}
+}
+@media only screen and (orientation: portrait) {
+	#sideBar {
+		display: none;
+	}
+	#forehead > img:last-of-type {
+		height: 100%;
+		display: block;
+		margin: auto;
+	}
+	#forehead > img:first-of-type {
+		display: none;
+	}
+	#dock {
+		bottom: 40px;
+	}
+	#botNav {
+		width: 100%;
+		height: 40px;
+		background-color: #282828;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: flex;
+	}
+	#container {
+		height: calc(100vh - 170px);
+		width: 100vw;
+		left: 0;
+	}
+	#restOfDock {
+		display: none;
+	}
+	#bottomDock {
+		justify-content: center;
+	}
+}
