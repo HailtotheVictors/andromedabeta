@@ -1,0 +1,136 @@
+#libraryAlbum {
+	height: 180px;
+	width: 180px;
+	margin: 10px;
+	border-radius: 10%;
+}
+#libraryAlbumCont {
+	height: 200px;
+	width: 200px;
+}
+#libraryTop {
+	height: auto;
+	width: 100%;
+	display: flex;
+}
+#libraryDescCont {
+	width: calc(100% - 200px);
+	height: auto;
+}
+#libraryAlbumName {
+	font-family: 'Roboto', sans-serif;
+	color: #ccc;
+	font-size: 60px;
+}
+.libraryAlbumText {
+	font-family: 'Roboto', sans-serif;
+	color: #aaa;
+	font-size: 30px;
+}
+.libraryActionBar {
+	width: 100%;
+	height: auto;
+}
+.libraryActionBar > svg {
+	height: 50px;
+	width: 50px;
+	padding: 5px;
+	margin: 10px 5px;
+	background-color: #444;
+	border-radius: 50%;
+	fill: #aaa;
+}
+.libraryActionBar > svg:first-of-type {
+	margin-left: 0;
+}
+.libraryActionBar > svg:hover {
+	background-color: #555;
+	cursor: pointer;
+}
+#librarySongsCont {
+	width: 100%;
+	height: auto;
+}
+.librarySongRow {
+	height: 90px;
+	width: 100%;
+	display: flex;
+}
+.librarySongRow:nth-of-type(even) {
+	background-color: #444;
+}
+.librarySongRow > img {
+	height: 80px;
+	width: 80px;
+	margin: 5px;
+	border-radius: 10%;
+	flex-shrink: 0;
+	margin-left: 10px;
+}
+.librarySongRow > svg {
+	height: 40px;
+	width: 40px;
+	padding: 10px;
+	margin: 15px 0;
+	border-radius: 50%;
+	fill: #aaa;
+	flex-shrink: 0;
+}
+.librarySongRow:nth-of-type(odd) > svg:hover {
+	background-color: #444;
+	cursor: pointer;
+}
+.librarySongRow:nth-of-type(even) > svg:hover {
+	background-color: #555;
+	cursor: pointer;
+}
+.libraryRowTont {
+	width: calc(100% - 215px);
+	height: 90px;
+}
+.librarySongName {
+	font-family: 'Roboto', sans-serif;
+	font-size: 32px;
+	color: #ccc;
+}
+.libraryArtist {
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	color: #999;
+}
+@media only screen and (orientation: portrait) {
+	#libraryTop {
+		display: block;
+	}
+	#libraryDescCont {
+		text-align: center;
+		width: 100%;
+	}
+	#libraryAlbumCont {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	.librarySongRow {
+		height: 70px;
+	}
+	.librarySongRow > img {
+		height: 60px;
+		width: 60px;
+		margin-left: 5px;
+	}
+	.librarySongRow > svg {
+		padding: 5px;
+		margin: 10px 0;
+	}
+	.libraryRowTont {
+		height: 70px;
+		width: calc(100% - 170px);
+	}
+	.librarySongName {
+		font-size: 26px;
+	}
+	.libraryArtist {
+		font-size: 20px;
+	}
+}
