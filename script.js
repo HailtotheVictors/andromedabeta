@@ -123,6 +123,7 @@ function addRandomSong() {
 
 function viewPlaylist(num) {
 	goTo(2);
+	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums" + playlistCovers[num];
 }
 
 function playSongNow(elem) {
@@ -143,11 +144,6 @@ function showPlaylist(num) {
 }
 
 //playlist management
-function goToPlaylist(num) {
-	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums" + playlistCovers[num];
-	goTo(1);
-}
-
 function shuffle() {
 	
 }
