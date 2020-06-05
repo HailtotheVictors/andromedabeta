@@ -122,8 +122,9 @@ function addRandomSong() {
 }
 
 function viewPlaylist(num) {
-	goTo(2);
 	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums" + playlistCovers[num];
+	console.log(playlistCovers[num]);
+	goTo(2);
 }
 
 function playSongNow(elem) {
