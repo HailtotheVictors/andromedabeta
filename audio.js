@@ -7,7 +7,6 @@ var treble = 5;
 function conx() {
 audio = new Audio();
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3';
-	audio.style.display = "none";
 	document.body.appendChild(audio);
 
 	context = new AudioContext();
