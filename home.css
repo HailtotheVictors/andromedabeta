@@ -1,4 +1,4 @@
-/*planet*/
+/*quasar*/
 .translucent {
 	height: 100%;
 	width: 100%;
@@ -153,7 +153,7 @@
 		height: auto;
 	}
 	#albumSlide {
-		height: 400px;
+		height: 300px;
 	}
 	#queue {
 		margin-bottom: 10px;
