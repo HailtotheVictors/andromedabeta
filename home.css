@@ -1,0 +1,137 @@
+.translucent {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	background-color: #eee9;
+}
+#mainPlayer {
+	width: 55%;
+	height: 100%;
+}
+#verticalGrad {
+	width: 10px;
+	background-image: linear-gradient(var(--andro-blue),var(--andro-purple),var(--andro-magenta));
+	height: 100%;
+}
+#upNext {
+	width: calc(45% - 10px);
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+#albumSlide {
+	height: calc(100% - 200px);
+	width: 100%;
+	overflow-x: hidden;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.albumCover {
+	flex-shrink: 0;
+	height: calc(100% - 120px);
+	width: auto;
+	display: inline-block;
+	margin-top: 60px;
+	border-radius: 3%;
+	box-shadow: 5px 5px 5px #555;
+}
+.featuredAlbum {
+	height: calc(100% - 40px);
+	margin: 20px;
+}
+#songName, #songDesc {
+	width: calc(100% - 10px);
+	padding-left: 10px;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+}
+#songName {
+	height: 60px;
+	line-height: 60px;
+	font-size: 42px;
+	font-weight: bold;
+	color: #222;
+}
+#songDesc {
+	height: 40px;
+	line-height: 40px;
+	font-size: 28px;
+	color: #444;
+}
+#songButn {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	width: 100%;
+	height: 100px;
+}
+#songButn > svg {
+	height: 50px;
+	width: 50px;
+	padding: 10px;
+	margin: 15px 5px;
+	fill: #111;
+	background-color: var(--andro-blue);
+	border-radius: 50%;
+}
+#songButn > svg:hover {
+	background-color: var(--andro-hoverblue);
+	cursor: pointer;
+}
+#songButn > svg:first-of-type, #songButn > svg:last-of-type {
+	height: 40px;
+	width: 40px;
+	padding: 15px;
+	background-color: var(--andro-purple);
+}
+#songButn > svg:first-of-type:hover, #songButn > svg:last-of-type:hover {
+	background-color: var(--andro-hoverpurple);
+}
+#queue {
+	height: auto;
+	width: calc(100% - 20px);
+	margin: auto;
+	display: inline-block;
+	background-color: #eee;
+	border-radius: 10px;
+}
+#queueText {
+	width: calc(100% - 10px);
+	height: 30px;
+	line-height: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 28px;
+	padding: 5px;
+}
+.queueRow {
+	height: 70px;
+	width: 100%;
+	display: flex;
+}
+.queueRow > img {
+	height: 60px;
+	width: 60px;
+	margin: 5px;
+	border-radius: 5px;
+}
+.queueRow > div {
+	height: 80px;
+	width: calc(100% - 70px);
+}
+.queueName, .queueArtist {
+	font-family: 'Roboto', sans-serif;
+}
+.queueName {
+	height: 40px;
+	line-height: 40px;
+	font-size: 36px;
+	color: #333;
+}
+.queueArtist {
+	height: 30px;
+	line-height: 30px;
+	font-size: 24px;
+	color: #555;
+}
