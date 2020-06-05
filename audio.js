@@ -7,11 +7,13 @@ var treble = 5;
 function conx() {
 audio = new Audio();
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3';
+	audio.style.display = "none";
 	document.body.appendChild(audio);
-        //create context
+
 	context = new AudioContext();
 	var analyser = context.createAnalyser();
-	
+
+	// Wait for window.onload to fire. See crbug.com/112368
 	//window.addEventListener('load', function(e) {
 	  // Our <audio> element will be the audio source.
 		var source = context.createMediaElementSource(audio);
