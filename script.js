@@ -142,6 +142,16 @@ function showPlaylist(num) {
 	
 }
 
+//playlist management
+function goToPlaylist(num) {
+	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/albums" + playlistCovers[num];
+	goTo(1);
+}
+
+function shuffle() {
+	
+}
+
 //audio and eq stuff
 function setEQ(elem) {
 	document.getElementsByClassName("eqOutput")[elem.getAttribute("data-eqindex")].innerHTML = elem.value;
