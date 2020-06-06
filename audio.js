@@ -4,9 +4,10 @@ var playButton;
 var audioElement;
 var bass = 10;
 var treble = 5;
-function conx() {
+function conx(url) {
 audio = new Audio();
-	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3';
+	audio.src = url;
+	audio.style.display = "none";
 	document.body.appendChild(audio);
 
 	context = new AudioContext();
