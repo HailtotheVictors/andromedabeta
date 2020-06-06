@@ -220,6 +220,7 @@ function shuffle() {
 		}
 		playPause();
 		updateProgress();
+		updateQueue();
 	}
 }
 
@@ -237,12 +238,23 @@ function updateProgress() {
 	}
 }
 
+function prevSong() {
+	if (songIndex > 0) {
+		songIndex--;
+		audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
+		updateProgress();
+		audio.play();
+		updateQueue();
+	}
+}
+
 function nextSong() {
 	songIndex++;
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
 	updateProgress();
 	addRandomSong();
 	audio.play();
+	updateQueue();
 }
 
 function playPause() {
@@ -286,6 +298,17 @@ function addToQueueFromList(elem) {
 
 function addToQueue(num) {
 	songQueue.splice(songIndex + 1, 0, num);
+}
+
+function updateQueue() {
+	var index = document.getElementsByClassName("queueName");
+	var people = document.getElementsByClassName("queueArtist");
+	var imageParents = document.getElementsByClassName("queueRow");
+	for (var i = 0; i < index.length; i++) {
+		index[i].innerHTML = songList[songQueue[songIndex + i]][1];
+		people[i].innerHTML = songList[songQueue[songIndex + i]][2];
+		imageParents[i].children[0].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + i]][3];
+	}
 }
 
 //library page
