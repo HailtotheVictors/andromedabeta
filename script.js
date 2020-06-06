@@ -256,7 +256,7 @@ function playPause() {
 	var index = document.getElementsByClassName(hide);
 	for (var i = 0; i < index.length; i++) {
 		index[i].style.display = "none";
-		document.getElementsByClassName(show).style.display = "block";
+		document.getElementsByClassName(show)[i].style.display = "block";
 	}
 }
 
