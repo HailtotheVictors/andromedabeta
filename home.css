@@ -1,4 +1,3 @@
-/*quasar*/
 .translucent {
 	height: 100%;
 	width: 100%;
@@ -41,6 +40,9 @@
 .featuredAlbum {
 	height: calc(100% - 40px);
 	margin: 20px;
+}
+.featuredAlbum:hover {
+	cursor: pointer;
 }
 #songName, #songDesc {
 	width: calc(100% - 10px);
