@@ -34,11 +34,11 @@ function checkKey(e) {
     if (e.keyCode == '38') {
         // up arrow
     } else if (e.keyCode == '40') {
-        // down arrow
+		// down arrow
     } else if (e.keyCode == '37') {
-       prevSong();
+		prevSong();
     } else if (e.keyCode == '39') {
-       nextSong();
+		nextSong();
     } else if (e.keyCode == '32') {
 		playPause();
 	}
@@ -411,8 +411,8 @@ function playSongNow(elem) {
 	var song = Number(elem.parentElement.getAttribute("data-song"));
 	songQueue[songIndex] = song;
 	audio.pause();
-	audio.src = "hailtothevictors.github.io/andromeda/AndromedaX/" + songList[song][0] + ".mp3";
-	document.getElementsByClassName("albumCover")[3].src = "hailtothevictors.github.io/andromeda" + songList[song][3];
+	audio.src = "https://hailtothevictors.github.io/andromeda/AndromedaX/" + songList[song][0] + ".mp3";
+	document.getElementsByClassName("albumCover")[3].src = "https://hailtothevictors.github.io/andromeda" + songList[song][3];
 	updateQueue();
 }
 
@@ -423,7 +423,7 @@ function addToQueueFromList(elem) {
 
 function addToQueue(num) {
 	songQueue.splice(songIndex + 1, 0, num);
-	document.getElementsByClassName("albumCover")[2].src = "hailtothevictors.github.io/andromeda" + songList[num][3];
+	document.getElementsByClassName("albumCover")[2].src = "https://hailtothevictors.github.io/andromeda" + songList[num][3];
 	updateQueue();
 }
 
