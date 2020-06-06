@@ -21,6 +21,12 @@ function init() {
 	}
 }
 
+document.body.onkeyup = function(e){
+    if (e.keyCode == 32){
+		playPause();
+    }
+}
+
 //navigation
 function expandNav() {
 	var elem = document.getElementById("sideBar");
@@ -208,7 +214,7 @@ function shuffle() {
 			audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3';
 			audio.currentTime = 0;
 		}
-		audio.play();
+		playPause();
 		updateProgress();
 	}
 }
@@ -217,12 +223,40 @@ function updateProgress() {
 	if (progressUpdate == -1) {
 		progressUpdate = setInterval(function() {
 			document.getElementById("songProgress").innerHTML = toMins(Math.round(audio.currentTime)) + "/" + toMins(Math.round(audio.duration));
-			console.log(audio.currentTime / audio.duration);
 			document.getElementById("scrubBar").value = audio.currentTime / audio.duration;
 			if (audio.currentTime == audio.duration) {
 				console.log('Next Song');
+				stopUpdate();
+				nextSong();
 			}
 		}, 100);
+	}
+}
+
+function nextSong() {
+	songIndex++;
+	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
+	audio.play();
+}
+
+function playPause() {
+	var show;
+	var hide;
+	if (audio.paused == true) {
+		audio.play();
+		updateProgress();
+		show = "pause";
+		hide = "play"
+	} else {
+		audio.pause();
+		stopUpdate();
+		show = "play";
+		hide = "pause";
+	}
+	var index = document.getElementsByClassName(hide);
+	for (var i = 0; i < index.length; i++) {
+		index[i].style.display = "none";
+		document.getElementsByClassName(show).style.display = "block";
 	}
 }
 
