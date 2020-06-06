@@ -19,6 +19,9 @@ function init() {
 	for (var i = 0; i < songList.length; i++){
 		playlists[0].push(i);
 	}
+	var myElement = document.getElementsByClassName("featuredAlbum")[0];
+	myElement.addEventListener("touchstart", startTouch, false);
+	myElement.addEventListener("touchmove", moveTouch, false);
 }
 
 document.addEventListener('keyup', event => {
