@@ -1,11 +1,9 @@
 var context;
 var audio;
-var playButton;
-var audioElement;
-var bass = 10;
-var treble = 5;
+var bass = 0;
+var treble = 0;
 function conx(url) {
-audio = new Audio();
+	audio = new Audio();
 	audio.src = url;
 	audio.style.display = "none";
 	document.body.appendChild(audio);
