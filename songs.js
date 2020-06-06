@@ -1,3 +1,4 @@
+var songLengths = [261,203,185,223,252,206,188,194,234,235,218,257,255,218,183,234,232,180,238,203,253,218,248,255,193,230,266,246,339,254,184,182,203,189,181,230,213,218,229,195,232,174,232,192,261,313,364,265,279,174,187,193,212,275,317,229,251,232,190,170,217,200,182,249,271,233];
 var songList = [];
 
 //b
@@ -33,7 +34,7 @@ songList[22] = ["happyliar","Happy Liar","Adamusic","/albums/happyliar.png","[Si
 songList[23] = ["heart_upon_my_sleeve","Heart Upon My Sleeve","Avicii ft. Imagine Dragons","/albums/tim.jpg","Tim (2019)"];
 songList[24] = ["ibetmylife","I Bet My Life","Imagine Dragons","/albums/ibetmylife.jpg","[Single] (2014)"];
 songList[25] = ["imsosorry","I'm So Sorry","Imagine Dragons","/albums/smokemirrors.jpg","Smoke + Mirrors (2015)"];
-songList[26] = ["imaginedragonsthemegamix","Imagine Dragons: The Megamix","InanimateMashups","/albums/themegamix.png","[Single] (2017)"];
+songList[26] = ["imaginedragonsthemegamix","Imagine Dragons: The Megamix","InanimateMashups","/albums/megamix.png","[Single] (2017)"];
 songList[27] = ["itstime","It's Time","Imagine Dragons","/albums/itstime.jpg","[Single] (2012)"];
 
 //l,m,n,o,p
@@ -61,7 +62,7 @@ songList[46] = ["Stolen_Dance_Flic_Flac","Stolen Dance (Flic Flac Edit)","Milky 
 songList[47] = ["sunsetjesus","Sunset Jesus","Avicii","/albums/stories.jpg","Stories (2015)"];
 
 //t,v
-songList[48] = ["thedays","The Days","Avicii","/albums/thedays.jpg","[Single] 2014"];
+songList[48] = ["thedays","The Days","Avicii","/albums/thedays.png","[Single] 2014"];
 songList[49] = ["The_Nights","The Nights","Avicii","/albums/The_Nights.jpg","[Single] (2014)"];
 songList[50] = ["thunder","Thunder","Imagine Dragon","/albums/thunder.jpg","[Single] (2017)"];
 songList[51] = ["tiptoe","Tiptoe","Imagine Dragons","/albums/Night_Visions.jpg","Night Visions (2013)"];
