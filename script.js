@@ -412,6 +412,7 @@ function playSongNow(elem) {
 	songQueue[songIndex] = song;
 	audio.pause();
 	audio.src = "hailtothevictors.github.io/andromeda/AndromedaX/" + songList[song][0] + ".mp3";
+	document.getElementsByClassName("albumCover")[3].src = "hailtothevictors.github.io/andromeda" + songList[song][3];
 	updateQueue();
 }
 
@@ -422,6 +423,7 @@ function addToQueueFromList(elem) {
 
 function addToQueue(num) {
 	songQueue.splice(songIndex + 1, 0, num);
+	document.getElementsByClassName("albumCover")[2].src = "hailtothevictors.github.io/andromeda" + songList[num][3];
 	updateQueue();
 }
 
