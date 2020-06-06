@@ -130,8 +130,9 @@ function addRandomSong() {
 		lim++;
 		var randomSong = Math.floor(Math.random() * playlists[currentPlaylist].length);
 		var x = songQueue.length;
-		if (randomSong !== songQueue[x-1] && randomSong !== songQueue[x-2] && randomSong !== songQueue[x-3] && randomSong !== songQueue[x-4] && randomSong !== songQueue[x-5]) {
-			songQueue.push(playlists[currentPlaylist][randomSong]);
+		var potential = playlists[currentPlaylist][randomSong];
+		if (potential !== songQueue[x-1] && potential !== songQueue[x-2] && potential !== songQueue[x-3] && potential !== songQueue[x-4] && potential !== songQueue[x-5]) {
+			songQueue.push(potential);
 		}
 	}
 	lim = 0;
