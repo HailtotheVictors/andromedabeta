@@ -347,7 +347,7 @@ function animateCarousel(dir) {
 			index[makeLarge].addEventListener("click",playPause);
 			index[makeSmall].style.height = "calc(100% - 120px)";
 			index[makeLarge].style.height = "calc(100% - 40px)";
-			newImage.style.height = "calc(100% - 40px)";
+			newImage.style.height = "calc(100% - 120px)";
 			//DO LAST
 			if (dir == "next") {
 				index[0].remove();
