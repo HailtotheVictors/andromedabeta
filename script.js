@@ -217,10 +217,13 @@ function shuffle() {
 	if (Number(document.getElementById("libraryAlbum").getAttribute("data-list")) !== currentPlaylist) {
 		songQueue.length = 0;
 		addRandomSong();
-	}
-	if (hasPlayed == false) {
-		conx('https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3');
-		hasPlayed = true;
+		if (hasPlayed == false) {
+			conx('https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3');
+			hasPlayed = true;
+		} else {
+			audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3';
+			audio.currentTime = 0;
+		}
 	}
 }
 
