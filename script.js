@@ -242,6 +242,7 @@ function updateProgress() {
 
 function prevSong() {
 	if (songIndex > 0) {
+		stopUpdate();
 		songIndex--;
 		audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
 		audio.play();
@@ -251,6 +252,7 @@ function prevSong() {
 }
 
 function nextSong() {
+	stopUpdate();
 	songIndex++;
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
 	addRandomSong();
