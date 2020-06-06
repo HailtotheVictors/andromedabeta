@@ -6,6 +6,7 @@ function conx(url) {
 	audio = new Audio();
 	audio.src = url;
 	audio.style.display = "none";
+	audio.addEventListener("canplay",audioVerified);
 	document.body.appendChild(audio);
 
 	context = new AudioContext();
