@@ -22,10 +22,10 @@ function init() {
 	for (var i = 0; i < songList.length; i++){
 		playlists[0].push(i);
 	}
-	var myElement = document.getElementsByClassName("featuredAlbum")[0];
+	var myElement = document.getElementById("albumSlide");
 	myElement.addEventListener("touchstart", startTouch, false);
 	myElement.addEventListener("touchmove", moveTouch, false);
-	myElement.addEventListener("click",playPause);
+	document.getElementsByClassName("featuredAlbum")[0].addEventListener("click",playPause);
 }
 
 document.addEventListener('keyup', event => {
@@ -227,6 +227,10 @@ function shuffle() {
 		playPause();
 		updateProgress();
 		updateQueue();
+		var index = document.getElementsByClassName("albumCover");
+		index[1].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
+		index[2].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + 1]][3];
+		goTo(0);
 	}
 }
 
@@ -261,6 +265,7 @@ function nextSong() {
 
 function newSong() {
 	clearInterval(verification);
+	document.getElementById("home").style.backgroundImage = "url('https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3] + "')";
 	stopUpdate();
 	updateQueue();
 	verifyAudio();
@@ -331,7 +336,7 @@ function animateCarousel(dir) {
 			}
 			clearInterval(animate);
 		}
-	}, 25);
+	}, 10);
 }
 
 function playPause() {
