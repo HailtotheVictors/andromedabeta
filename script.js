@@ -242,25 +242,26 @@ function updateProgress() {
 
 function prevSong() {
 	if (songIndex > 0) {
-		clearInterval(verification);
-		stopUpdate();
 		songIndex--;
-		audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
-		audio.play();
-		updateQueue();
-		verifyAudio();
+		newSong();
 	}
 }
 
 function nextSong() {
+	songIndex++;
+	addRandomSong();
+	newSong();
+}
+
+function newSong() {
 	clearInterval(verification);
 	stopUpdate();
-	songIndex++;
-	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
-	addRandomSong();
-	audio.play();
 	updateQueue();
 	verifyAudio();
+	document.getElementById("songName").innerHTML = songList[songQueue[songIndex]][1];
+	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2];
+	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
+	audio.play();
 }
 
 function playPause() {
