@@ -240,6 +240,8 @@ function updateProgress() {
 function nextSong() {
 	songIndex++;
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
+	updateProgress();
+	addRandomSong();
 	audio.play();
 }
 
