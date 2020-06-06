@@ -28,11 +28,28 @@ function init() {
 	document.getElementsByClassName("featuredAlbum")[0].addEventListener("click",playPause);
 }
 
-document.addEventListener('keyup', event => {
+/*document.addEventListener('keyup', event => {
 	if (event.code === 'Space') {
 		playPause();
 	}
-})
+})*/
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+    e = e || window.event;
+    if (e.keyCode == '38') {
+        // up arrow
+    } else if (e.keyCode == '40') {
+        // down arrow
+    } else if (e.keyCode == '37') {
+       prevSong();
+    } else if (e.keyCode == '39') {
+       nextSong();
+    } else if (e.keyCode == '32') {
+		playPause();
+	}
+
+}
 
 //navigation
 var animateSide;
