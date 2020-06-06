@@ -219,8 +219,16 @@ function updateProgress() {
 			document.getElementById("songProgress").innerHTML = toMins(Math.round(audio.currentTime)) + "/" + toMins(Math.round(audio.duration));
 			console.log(audio.currentTime / audio.duration);
 			document.getElementById("scrubBar").value = audio.currentTime / audio.duration;
-		}, 1000);
+			if (audio.currentTime == audio.duration) {
+				console.log('Next Song');
+			}
+		}, 100);
 	}
+}
+
+function scrubSong() {
+	var newVal = document.getElementById("scrubBar").value;
+	audio.currentTime = newVal * audio.duration;
 }
 
 function stopUpdate() {
