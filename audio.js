@@ -28,7 +28,6 @@ function conx(url) {
 		trebleFilter = context.createBiquadFilter();
 		trebleFilter.type = "highshelf"; 
 		trebleFilter.frequency.value = 2000;  // switches to 6000 in UI
-		console.log(trebleFilter.frequency.value);
 		trebleFilter.gain.value = treble;  // you'll need to hook this to UI too
 
 		source.connect(bassFilter); 
