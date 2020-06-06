@@ -246,7 +246,7 @@ function playPause() {
 		audio.play();
 		updateProgress();
 		show = "pause";
-		hide = "play"
+		hide = "play";
 	} else {
 		audio.pause();
 		stopUpdate();
