@@ -8,6 +8,8 @@ var playlistNames  = ["M&uacute;sica","Imagine Dragons","Avicii","Milky Chance",
 var progressUpdate = -1;
 var verification;
 var playlists = [];
+var fullAlbum;
+var miniAlbum;
 
 playlists[0] = []; //all songs
 playlists[1] = [0,1,3,6,7,13,14,23,24,25,27,31,33,34,35,40,41,42,43,44,51,57,59,60,61,63]; //imagine dragons
@@ -33,6 +35,7 @@ document.addEventListener('keyup', event => {
 })
 
 //navigation
+var animateSide;
 function expandNav() {
 	var elem = document.getElementById("sideBar");
 	var w = 60;
@@ -41,7 +44,7 @@ function expandNav() {
 	for (var i = 0; i < index.length; i++) {
 		index[i].style.display = "block";
 	}
-	var animate = setInterval(function() {
+	animateSide = setInterval(function() {
 		w += 5;
 		o++;
 		elem.style.width = w + "px";
@@ -49,12 +52,13 @@ function expandNav() {
 			index[i].style.opacity = String(o / 36);
 		}
 		if (w == 240) {
-			clearInterval(animate);
+			clearInterval(animateSide);
 		}
 	}, 5);
 }
 
 function collapseNav() {
+	clearInterval(animateSide);
 	var elem = document.getElementById("sideBar");
 	elem.style.width = "60px";
 	var index = document.getElementsByClassName("navText");
@@ -243,12 +247,14 @@ function updateProgress() {
 function prevSong() {
 	if (songIndex > 0) {
 		songIndex--;
+		animateCarousel("prev");
 		newSong();
 	}
 }
 
 function nextSong() {
 	songIndex++;
+	animateCarousel("next");
 	addRandomSong();
 	newSong();
 }
@@ -262,6 +268,70 @@ function newSong() {
 	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2];
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
 	audio.play();
+}
+
+function animateCarousel(dir) {
+	var index = document.getElementsByClassName("albumCover");
+	var stage = document.getElementById("albumSlide");
+	var newImage = document.createElement("IMG");
+	newImage.classList.add("albumCover");
+	newImage.style.height = "0px";
+	if (dir == "next") {
+		newImage.src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + 1]][3];
+	} else {
+		if (songIndex - 1 < 0) {
+			newImage.src = "https://hailtothevictors.github.io/andromeda/albums/placeholder.png";
+			newImage.style.boxShadow = "none";
+		} else {
+			newImage.src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex - 1]][3];
+		}
+	}
+	var makeSmall;
+	var makeLarge;
+	var makeGone;
+	if (dir == "next") {
+		stage.append(newImage);
+		makeSmall = 1;
+		makeLarge = 2;
+		makeGone = 0;
+	} else {
+		stage.prepend(newImage);
+		makeSmall = 2;
+		makeLarge = 1;
+		makeGone = 3;
+	}
+	var h = stage.offsetHeight;
+	newImage.style.marginTop = h / 2 + "px";
+	var fullAlbum = index[makeSmall].offsetHeight;
+	var miniAlbum = index[makeLarge].offsetHeight;
+	var difference = fullAlbum - miniAlbum;
+	var limit = 40;
+	var cycle = 0;
+	
+	var animate = setInterval(function() {
+		cycle++;
+		index[makeSmall].style.height = fullAlbum - difference * cycle / limit + "px";
+		index[makeSmall].style.marginTop = 20 + cycle + "px";
+		index[makeLarge].style.height = miniAlbum + difference * cycle / limit + "px";
+		index[makeLarge].style.marginTop = 60 - cycle + "px";
+		index[makeGone].style.height = miniAlbum * (limit - cycle) / limit + "px";
+		index[makeGone].style.marginTop = 60 + miniAlbum * cycle / limit + "px";
+		newImage.style.height = miniAlbum * cycle / limit + "px";
+		newImage.style.marginTop = h / 2 - (miniAlbum * cycle / limit) / 2 + "px";
+		if (cycle == limit) {
+			index[makeSmall].classList.remove("featuredAlbum");
+			index[makeSmall].removeEventListener("click",playPause);
+			index[makeLarge].classList.add("featuredAlbum");
+			index[makeLarge].addEventListener("click",playPause);
+			//DO LAST
+			if (dir == "next") {
+				index[0].remove();
+			} else {
+				index[3].remove();
+			}
+			clearInterval(animate);
+		}
+	}, 25);
 }
 
 function playPause() {
