@@ -1,209 +1,318 @@
-.translucent {
-	height: 100%;
+body {
+	background-color: #333;
+	margin: 0;
+	--andro-blue: #2b6395;
+	--andro-purple: #5e2e92;
+	--andro-magenta: #9c2488;
+	--andro-hoverblue: #3b73a5;
+	--andro-hoverpurple: #6e3ea2;
+	--andro-grey: #777;
+}
+#forehead {
+	height: 60px;
 	width: 100%;
-	display: flex;
-	background-color: #eee9;
+	background-color: #222;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-#mainPlayer {
-	width: 55%;
-	height: 100%;
+#forehead > img:first-of-type {
+	height: calc(100% - 6px);
+	padding: 3px;
+	display: block;
 }
-#verticalGrad {
-	width: 10px;
-	background-image: linear-gradient(var(--andro-blue),var(--andro-purple),var(--andro-magenta));
-	height: 100%;
+#forehead > img:last-of-type {
+	display: none;
 }
-#upNext {
-	width: calc(45% - 10px);
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-content: center;
+#sideBar {
+	width: 60px;
+	height: calc(100vh - 130px);
+	background-color: #282828;
+	position: absolute;
+	top: 60px;
+	left: 0;
+	box-shadow: 8px 0 8px -5px #888888;
+	z-index: 6;
 }
-#albumSlide {
-	height: calc(100% - 200px);
+.navRow {
 	width: 100%;
-	overflow-x: hidden;
+	height: 60px;
+	border-radius: 20px;
 	display: flex;
-	justify-content: center;
-	align-content: center;
+	overflow: hidden;
 }
-.albumCover {
-	flex-shrink: 0;
-	height: calc(100% - 120px);
-	width: auto;
-	display: inline-block;
-	margin-top: 60px;
-	border-radius: 3%;
-	box-shadow: 5px 5px 5px #555;
+.navRow:first-of-type, .botNavIcon:first-of-type {
+	fill: var(--andro-blue);
+	color: var(--andro-blue);
 }
-.featuredAlbum {
-	height: calc(100% - 40px);
-	margin: 20px;
+.navRow:nth-of-type(2), .botNavIcon:nth-of-type(2) {
+	fill: var(--andro-purple);
+	color: var(--andro-purple);
 }
-.featuredAlbum:hover {
+.navRow:nth-of-type(3), .botNavIcon:nth-of-type(3) {
+	fill: var(--andro-magenta);
+	color: var(--andro-magenta);
+}
+.navRow:nth-of-type(4), .botNavIcon:nth-of-type(4) {
+	fill: var(--andro-grey);
+	color: var(--andro-grey);
+}
+.navRow:hover {
+	background-color: #383838;
 	cursor: pointer;
 }
-#songName, #songDesc {
-	width: calc(100% - 10px);
-	padding-left: 10px;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-}
-#songName {
-	height: 60px;
-	line-height: 60px;
-	font-size: 42px;
-	font-weight: bold;
-	color: #222;
-}
-#songDesc {
-	height: 40px;
-	line-height: 40px;
-	font-size: 28px;
-	color: #444;
-}
-#songButn {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	width: 100%;
-	height: auto;
-}
-#songButn > svg {
+.navIcon {
+	padding: 5px;
 	height: 50px;
 	width: 50px;
-	padding: 10px;
-	margin: 15px 5px;
-	fill: #111;
-	background-color: var(--andro-blue);
-	border-radius: 50%;
+	fill: inherit;
+	flex-shrink: 0;
 }
-#songButn > svg:hover {
-	background-color: var(--andro-hoverblue);
+.navText {
+	width: 170px;
+	color: inherit;
+	display: none;
+	font-family: 'Roboto', sans-serif;
+	line-height: 50px;
+	height: 50px;
+	padding: 5px;
+	font-weight: bold;
+	font-size: 36px;
+	opacity: 0;
+}
+#dock {
+	width: 100%;
+	height: 70px;
+	background-color: #222;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.rel {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+#botNav {
+	display: none;
+}
+.botNavIcon {
+	height: 30px;
+	width: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: calc((25% - 30px) / 2);
+	padding-right: calc((25% - 30px) / 2);
+	border-radius: 20px;
+}
+.botNavIcon:hover {
+	background-color: #383838;
 	cursor: pointer;
 }
-#songButn > svg:first-of-type, #songButn > svg:last-of-type {
-	height: 40px;
-	width: 40px;
-	padding: 15px;
-	background-color: var(--andro-purple);
-}
-#songButn > svg:first-of-type:hover, #songButn > svg:last-of-type:hover {
-	background-color: var(--andro-hoverpurple);
-}
-#queue {
-	height: auto;
-	width: calc(100% - 20px);
-	margin: auto;
-	display: inline-block;
-	background-color: #eee;
-	border-radius: 10px;
-}
-#queueText {
-	width: calc(100% - 10px);
-	height: 30px;
-	line-height: 30px;
+.title {
 	font-family: 'Roboto', sans-serif;
-	font-size: 28px;
-	padding: 5px;
+	width: auto;
+	padding: 16px;
+	font-size: 32px;
+	color: #eee;
+	font-weight: bold;
 }
-.queueRow {
-	height: 70px;
+#container {
+	height: calc(100vh - 130px);
+	width: calc(100vw - 60px);
+	position: absolute;
+	top: 60px;
+	left: 60px;
+}
+.carousel {
+	height: 250px;
 	width: 100%;
+	overflow-x: auto;
+	overflow-y: auto;
+	background-color: #444;
 	display: flex;
+	position: relative;
 }
-.queueRow > img {
-	height: 60px;
-	width: 60px;
-	margin: 5px;
-	border-radius: 5px;
+.slideCarousel {
+	position: absolute;
+	z-index: 4;
+	left: 0;
+	top: 85px;
+	height: 50px;
+	width: 50px;
+	fill: #eee;
+	background-color: #555c;
+	padding: 15px 0;
+	border-radius: 0 5px 5px 0;
+	display: none;
 }
-.queueRow > div {
+.slideCarousel:hover {
+	background-color: #888c;
+	cursor: pointer;
+}
+.slideCarousel:nth-of-type(2) {
+	left: calc(100% - 50px);
+	border-radius: 5px 0 0 5px;
+}
+.carousel::-webkit-scrollbar {
+	display: none;
+}
+.playlist {
+	height: 210px;
+	width: 210px;
+	margin-top: 20px;
+	margin-left: 20px;
+	border-radius: 5%;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	flex-shrink: 0;
+}
+.playlist:hover {
+	cursor: pointer;
+}
+.playlist > svg {
 	height: 70px;
-	width: calc(100% - 70px);
+	width: 70px;
+	padding: 10px;
+	background-color: #555c;
+	border-radius: 50%;
+	fill: #eee;
+	margin-top: 60px;
+	margin-left: 60px;
+	display: none;
 }
-.queueName, .queueArtist {
-	font-family: 'Roboto', sans-serif;
+.playlist:hover > svg {
+	display: block;
 }
-.queueName {
-	height: 40px;
-	line-height: 40px;
-	font-size: 36px;
-	color: #333;
+.card {
+	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
-.queueArtist {
-	height: 30px;
-	line-height: 30px;
+.card::-webkit-scrollbar {
+  width: 10px;
+}
+.card::-webkit-scrollbar-track {
+  background: #666;
+}
+.card::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.card::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+#bottomDock {
+	display: flex;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	position: absolute;
+	height: 60px;
+}
+#songNavIcons {
+	height: 60px;
+	width: auto;
+	overflow: hidden;
+}
+#songNavIcons > svg, #goUp {
+	height: 46px;
+	width: 46px;
+	padding: 2px;
+	background-color: #222;
+	border-radius: 50%;
+	fill: #ccc;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#songNavIcons > svg:hover, #goUp:hover {
+	background-color: #444;
+	cursor: pointer;
+}
+#songProgress {
+	font-family: 'Roboto', monospace;
+	color: #ccc;
+	height: 50px;
+	line-height: 50px;
+	padding: 5px 10px;
 	font-size: 24px;
-	color: #555;
+	width: auto;
+	text-align: center;
+	letter-spacing: 2px;
+}
+.pause {
+	display: none;
+}
+.divider {
+	height: 5px;
+	width: 100%;
+	background-image: linear-gradient(to right, var(--andro-blue), var(--andro-purple), var(--andro-magenta));
+}
+#home {
+	display:none;
+	background-image:url('https://hailtothevictors.github.io/andromeda/albums/kind.png');
+	background-size: cover;
+	background-position: center;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #scrubBar {
+		overflow: hidden;
+		-webkit-appearance: none;
+		background-color: #555;
+		margin: 0;
+		display: inline-block;
+		width: 100%;
+		position: absolute;
+		top: 0;
+    }
+    #scrubBar::-webkit-slider-thumb {
+		width: 10px;
+		-webkit-appearance: none;
+		height: 10px;
+		background: #bbb;
+		border-radius: 50%;
+		box-shadow: -5005px 0 0 5000px var(--andro-blue);
+    }
+	#scrubBar::-webkit-slider-thumb:hover {
+		cursor: pointer;
+	}
+	#scrubBar:focus {
+		outline: none;
+	}
 }
 @media only screen and (orientation: portrait) {
-	.translucent {
-		display: block;
-		height: auto;
-	}
-	#verticalGrad {
+	#sideBar {
 		display: none;
 	}
-	#mainPlayer {
+	#forehead > img:last-of-type {
+		height: 100%;
+		display: block;
+		margin: auto;
+	}
+	#forehead > img:first-of-type {
+		display: none;
+	}
+	#dock {
+		bottom: 40px;
+	}
+	#botNav {
 		width: 100%;
-		height: auto;
-	}
-	#upNext {
-		width: 100%;
-		height: auto;
-	}
-	#albumSlide {
-		height: 300px;
-	}
-	#queue {
-		margin-bottom: 10px;
-	}
-	#songName {
-		font-size: 26px;
 		height: 40px;
-		line-height: 40px;
+		background-color: #282828;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: flex;
 	}
-	#songDesc {
-		font-size: 20px;
+	#container {
+		height: calc(100vh - 170px);
+		width: 100vw;
+		left: 0;
 	}
-	#songName, #songDesc {
-		width: 100%;
-		padding-left: 0;
+	#restOfDock {
+		display: none;
 	}
-	#songButn > svg {
-		height: 40px;
-		width: 40px;
-		padding: 5px;
-		margin: 10px 5px;
-	}
-	#songButn > svg:first-of-type, #songButn > svg:last-of-type {
-		height: 30px;
-		width: 30px;
-		padding: 10px;
-	}
-	.queueName {
-		font-size: 22px;
-		height: 30px;
-		line-height: 30px;
-	}
-	.queueArtist {
-		font-size: 18px;
-		height: 20px;
-		line-height: 20px;
-	}
-	.queueRow {
-		height: 50px;
-	}
-	.queueRow > img {
-		height: 40px;
-		width: 40px;
-		margin: 5px;
-		border-radius: 3px;
-	}
-	.queueRow > div {
-		height: 50px;
-		width: calc(100% - 50px);
+	#bottomDock {
+		justify-content: center;
 	}
 }
