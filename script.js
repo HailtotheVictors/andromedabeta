@@ -86,6 +86,9 @@ function collapseNav() {
 }
 
 function goTo(page) {
+	if (page == 0 && hasPlayed == false) {
+		page = 1;
+	}
 	var index = document.getElementsByClassName("card");
 	for (var i = 0; i < index.length; i++) {
 		if (i == page) {
@@ -242,7 +245,7 @@ function shuffle() {
 			audio.currentTime = 0;
 		}
 		playPause();
-		updateProgress();
+		//updateProgress();
 		updateQueue();
 		var index = document.getElementsByClassName("albumCover");
 		index[1].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
@@ -257,12 +260,16 @@ function updateProgress() {
 			document.getElementById("songProgress").innerHTML = toMins(Math.round(audio.currentTime)) + "/" + toMins(Math.round(audio.duration));
 			document.getElementById("scrubBar").value = audio.currentTime / audio.duration;
 			if (audio.currentTime == audio.duration) {
-				console.log('Next Song');
 				stopUpdate();
 				nextSong();
 			}
 		}, 100);
 	}
+}
+
+function stopUpdate() {
+	clearInterval(progressUpdate);
+	progressUpdate = -1;
 }
 
 function prevSong() {
@@ -287,7 +294,7 @@ function newSong() {
 	updateQueue();
 	verifyAudio();
 	document.getElementById("songName").innerHTML = songList[songQueue[songIndex]][1];
-	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2];
+	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2] + " | " + songList[songQueue[songIndex]][4];
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
 	audio.play();
 }
@@ -400,11 +407,6 @@ function verifyAudio() {
 			nextSong();
 		}
 	}, 1000);
-}
-
-function stopUpdate() {
-	clearInterval(progressUpdate);
-	progressUpdate = -1;
 }
 
 function playSongNow(elem) {
