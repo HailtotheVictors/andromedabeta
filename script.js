@@ -319,6 +319,11 @@ function showPlaylist(num) {
 //audio and eq stuff
 function setEQ(elem) {
 	document.getElementsByClassName("eqOutput")[elem.getAttribute("data-eqindex")].innerHTML = elem.value;
+	if (elem.getAttribute("data-eqindex") == 0) {
+		trebleFilter.trebleFilter.gain.value = elem.value;
+	} else {
+		bassFilter.trebleFilter.gain.value = elem.value;
+	}
 }
 
 //resources
