@@ -6,6 +6,7 @@ var hasPlayed = false;
 var playlistCovers = ["musica.png","imaginedragons.png","avicii.png","milkychance.jpg","elli.png"];
 var playlistNames  = ["M&uacute;sica","Imagine Dragons","Avicii","Milky Chance","Elli"];
 var progressUpdate = -1;
+var verification;
 var playlists = [];
 
 playlists[0] = []; //all songs
@@ -243,19 +244,19 @@ function prevSong() {
 	if (songIndex > 0) {
 		songIndex--;
 		audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
-		updateProgress();
 		audio.play();
 		updateQueue();
+		verifyAudio();
 	}
 }
 
 function nextSong() {
 	songIndex++;
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
-	updateProgress();
 	addRandomSong();
 	audio.play();
 	updateQueue();
+	verifyAudio();
 }
 
 function playPause() {
@@ -282,6 +283,23 @@ function playPause() {
 function scrubSong() {
 	var newVal = document.getElementById("scrubBar").value;
 	audio.currentTime = newVal * audio.duration;
+}
+
+function audioVerified() {
+	clearInterval(verification);
+	updateProgress();
+}
+
+function verifyAudio() {
+	var fails = 0;
+	verification = setInterval(function() {
+		fails++;
+		console.log(fails);
+		if (fails == 5) {
+			clearInterval(verification);
+			nextSong();
+		}
+	}, 1000);
 }
 
 function stopUpdate() {
