@@ -5,6 +5,7 @@ var currentPlaylist = 0;
 var hasPlayed = false;
 var playlistCovers = ["musica.png","imaginedragons.png","avicii.png","milkychance.jpg","elli.png"];
 var playlistNames  = ["M&uacute;sica","Imagine Dragons","Avicii","Milky Chance","Elli"];
+var progressUpdate = -1;
 var playlists = [];
 
 playlists[0] = []; //all songs
@@ -195,6 +196,38 @@ function viewPlaylist(num) {
 	//document.getElementById("libraryAlbumText").innerHTML = playlists[num].length + " songs"
 }
 
+function shuffle() {
+	if (Number(document.getElementById("libraryAlbum").getAttribute("data-list")) !== currentPlaylist) {
+		songQueue.length = 0;
+		currentPlaylist = Number(document.getElementById("libraryAlbum").getAttribute("data-list"));
+		addRandomSong();
+		if (hasPlayed == false) {
+			conx('https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3');
+			hasPlayed = true;
+		} else {
+			audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3';
+			audio.currentTime = 0;
+		}
+		audio.play();
+		updateProgress();
+	}
+}
+
+function updateProgress() {
+	if (progressUpdate == -1) {
+		progressUpdate = setInterval(function() {
+			document.getElementById("songProgress").innerHTML = toMins(Math.round(audio.currentTime)) + "/" + toMins(Math.round(audio.duration));
+			console.log(audio.currentTime / audio.duration);
+			document.getElementById("scrubBar").value = audio.currentTime / audio.duration;
+		}, 1000);
+	}
+}
+
+function stopUpdate() {
+	clearInterval(progressUpdate);
+	progressUpdate = -1;
+}
+
 function playSongNow(elem) {
 	
 }
@@ -210,22 +243,6 @@ function addToQueue(num) {
 //library page
 function showPlaylist(num) {
 	
-}
-
-//playlist management
-function shuffle() {
-	if (Number(document.getElementById("libraryAlbum").getAttribute("data-list")) !== currentPlaylist) {
-		songQueue.length = 0;
-		currentPlaylist = Number(document.getElementById("libraryAlbum").getAttribute("data-list"));
-		addRandomSong();
-		if (hasPlayed == false) {
-			conx('https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3');
-			hasPlayed = true;
-		} else {
-			audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3';
-			audio.currentTime = 0;
-		}
-	}
 }
 
 //audio and eq stuff
