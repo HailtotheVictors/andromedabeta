@@ -40,6 +40,7 @@ function moveTouch(e) {
 		} else {
 			// swiped down
 			console.log("swiped down");
+			goTo(2);
 		}  
 	}
  
