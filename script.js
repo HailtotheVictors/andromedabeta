@@ -1,8 +1,4 @@
 window.onresize = setScroll;
-function init() {
-	setScroll();
-}
-
 var songIndex = 0;
 var songQueue = [];
 var currentPlaylist = 0;
@@ -10,11 +6,19 @@ var hasPlayed = false;
 var playlistCovers = ["musica.png","imaginedragons.png","avicii.png","milkychance.jpg","elli.png"];
 var playlistNames  = ["M&uacute;sica","Imagine Dragons","Avicii","Milky Chance","Elli"];
 var playlists = [];
-playlists[0] = songList.slice(0); //all songs
-playlists[1] = [0,5,6,8,9,10,11,12,15,23,27,29,30,31,32,37,40,41,42,43,45,47,48]; //imagine dragons
-playlists[2] = [1,4,7,16,17,26,28]; //milky chance
-playlists[3] = [3,11,19,22,24,33,35]; //avicii
-playlists[4] = [0,2,9,13,14,19,22,33,34,39,44]; //elli
+
+playlists[0] = []; //all songs
+playlists[1] = [0,1,3,6,7,13,14,23,24,25,27,31,33,34,35,40,41,42,43,44,51,57,59,60,61,63]; //imagine dragons
+playlists[2] = [8,17,19,23,28,30,47,48,49,55,56,62,65]; //avicii
+playlists[3] = [4,11,12,16,18,45,46]; //milky chance
+playlists[4] = [0,5,15,28,32,33,36,39,49,52,56]; //elli
+
+function init() {
+	setScroll();
+	for (var i = 0; i < songList.length; i++){
+		playlists[0].push(i);
+	}
+}
 
 //navigation
 function expandNav() {
@@ -111,11 +115,12 @@ function horizScroll(dir,elem) {
 //song management
 function addRandomSong() {
 	var lim = 0;
-	while (songQueue.length - songIndex < 5 && lim < 10) {
+	while (songQueue.length - songIndex < 5 && lim < 100) {
 		lim++;
 		var randomSong = Math.floor(Math.random() * playlists[currentPlaylist].length);
-		if (randomSong !== songQueue[-1] && randomSong !== songQueue[-2] && randomSong !== songQueue[-3] && randomSong !== songQueue[-4] && randomSong !== songQueue[-5]) {
-			songQueue.push(playlist[currentPlaylist][randomSong]);
+		var x = songQueue.length;
+		if (randomSong !== songQueue[x-1] && randomSong !== songQueue[x-2] && randomSong !== songQueue[x-3] && randomSong !== songQueue[x-4] && randomSong !== songQueue[x-5]) {
+			songQueue.push(playlists[currentPlaylist][randomSong]);
 		}
 	}
 	lim = 0;
@@ -123,8 +128,71 @@ function addRandomSong() {
 
 function viewPlaylist(num) {
 	document.getElementById("libraryAlbum").src = "https://hailtothevictors.github.io/andromeda/playlists/" + playlistCovers[num];
+	document.getElementById("libraryAlbum").setAttribute("data-list",num);
 	document.getElementById("libraryAlbumName").innerHTML = decodeEntities(playlistNames[num]);
+	const myNode = document.getElementById("librarySongsCont");
+	while (myNode.lastElementChild) {
+		myNode.removeChild(myNode.lastElementChild);
+	}
+	//make new rows
+	var totalLength = 0;
+	for (var i = 0; i < playlists[num].length; i++) {
+		totalLength += songLengths[playlists[num][i]];
+
+		var newRow = document.createElement("DIV");
+		newRow.classList.add("librarySongRow");
+		newRow.setAttribute("data-song",playlists[num][i]);
+		
+		newImage = document.createElement("img");
+		newImage.src = "https://hailtothevictors.github.io/andromeda" + songList[playlists[num][i]][3];
+		newRow.append(newImage);
+		
+		newTont = document.createElement("DIV");
+		newTont.classList.add("libraryRowTont");
+		
+		newTitle = document.createElement("SPAN");
+		newTitle.classList.add("librarySongName");
+		newTitle.innerHTML = songList[playlists[num][i]][1];
+		newTont.append(newTitle);
+		
+		newTont.append(document.createElement("BR"));
+		
+		newArtist = document.createElement("SPAN");
+		newArtist.classList.add("libraryArtist");
+		newArtist.innerHTML = songList[playlists[num][i]][2];
+		newTont.append(newArtist);
+		
+		newRow.append(newTont);
+		
+		newPlay = document.createElementNS("http://www.w3.org/2000/svg","svg");
+		newPlay.addEventListener("click",function() { playSongNow(this); });
+		newPlay.setAttribute("viewBox","0 0 24 24");
+		newPath = document.createElementNS("http://www.w3.org/2000/svg","path");
+		newPath.setAttribute("d","M8,5.14V19.14L19,12.14L8,5.14Z");
+		newPlay.append(newPath);
+		newRow.append(newPlay);
+		
+		newList = document.createElementNS("http://www.w3.org/2000/svg","svg");
+		newList.addEventListener("click",function() { addToQueueFromList(this); });
+		newList.setAttribute("viewBox","0 0 24 24");
+		newRoad = document.createElementNS("http://www.w3.org/2000/svg","path");
+		newRoad.setAttribute("d","M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z");
+		newList.append(newRoad);
+		newRow.append(newList);
+		
+		myNode.append(newRow);
+	}
 	goTo(2);
+	if (totalLength < 5460) {
+		var mins = Math.floor(totalLength / 60);
+		var secs = totalLength - mins * 60;
+		document.getElementById("libraryAlbumText").innerHTML = playlists[num].length + " songs, " + mins + standardPlural(" minute",mins) + " " + secs + standardPlural(" second",mins);
+	} else {
+		var hours = Math.floor(totalLength / 3600);
+		var mins = Math.round((totalLength - hours * 3600) / 60);
+		document.getElementById("libraryAlbumText").innerHTML = playlists[num].length + " songs, " + hours +standardPlural(" hour",hours) + " " + mins + standardPlural(" minute",mins);
+	}
+	//document.getElementById("libraryAlbumText").innerHTML = playlists[num].length + " songs"
 }
 
 function playSongNow(elem) {
@@ -146,7 +214,14 @@ function showPlaylist(num) {
 
 //playlist management
 function shuffle() {
-	
+	if (Number(document.getElementById("libraryAlbum").getAttribute("data-list")) !== currentPlaylist) {
+		songQueue.length = 0;
+		addRandomSong();
+	}
+	if (hasPlayed == false) {
+		conx('https://hailtothevictors.github.io/andromeda/AndromedaX/bustthistown.mp3');
+		hasPlayed = true;
+	}
 }
 
 //audio and eq stuff
@@ -155,6 +230,14 @@ function setEQ(elem) {
 }
 
 //resources
+function standardPlural(str,num) {
+	if (num == 1) {
+		return str;
+	} else {
+		return str + "s";
+	}
+}
+
 function toMins(num) {
 	var secs = num % 60;
 	var mins = (num - secs) / 60;
@@ -166,7 +249,6 @@ function toMins(num) {
 
 var decodeEntities = (function() {
 	var element = document.createElement('div');
-	//console.log(str);
 	function decodeHTMLEntities (str) {
 		if (str && typeof str === 'string') {
 			str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
