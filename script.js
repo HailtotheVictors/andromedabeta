@@ -22,6 +22,7 @@ function init() {
 	var myElement = document.getElementsByClassName("featuredAlbum")[0];
 	myElement.addEventListener("touchstart", startTouch, false);
 	myElement.addEventListener("touchmove", moveTouch, false);
+	myElement.addEventListener("click",playPause);
 }
 
 document.addEventListener('keyup', event => {
