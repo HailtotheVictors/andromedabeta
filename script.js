@@ -238,6 +238,7 @@ function shuffle() {
 			audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[0]][0] + '.mp3';
 			audio.currentTime = 0;
 		}
+		audio.play();
 		playPause();
 		updateQueue();
 		updateHome();
