@@ -21,11 +21,11 @@ function init() {
 	}
 }
 
-document.body.onkeyup = function(e){
-    if (e.keyCode == 32){
+document.addEventListener('keyup', event => {
+	if (event.code === 'Space') {
 		playPause();
-    }
-}
+	}
+})
 
 //navigation
 function expandNav() {
