@@ -250,6 +250,8 @@ function updateHome() {
 	index[1].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
 	index[2].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + 1]][3];
 	document.getElementById("home").style.backgroundImage = "url('https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3] + "')";
+	document.getElementById("songName").innerHTML = songList[songIndex[currentPlaylist]][1];
+	document.getElementById("songDesc").innerHTML = songList[songIndex[currentPlaylist]][2] + " | " + songList[songIndex[currentPlaylist]][4];
 }
 
 function updateProgress() {
@@ -412,7 +414,7 @@ function playSongNow(elem) {
 	songQueue[songIndex] = song;
 	audio.pause();
 	audio.src = "https://hailtothevictors.github.io/andromeda/AndromedaX/" + songList[song][0] + ".mp3";
-	document.getElementsByClassName("albumCover")[3].src = "https://hailtothevictors.github.io/andromeda" + songList[song][3];
+	document.getElementsByClassName("albumCover")[1].src = "https://hailtothevictors.github.io/andromeda" + songList[song][3];
 	updateQueue();
 }
 
