@@ -481,6 +481,7 @@ function updateMeta() {
 	var arg = {src: url};
 	var sys = [];
 	sys[0] = arg;
+	console.log(sys);
 	navigator.mediaSession.metadata = new MediaMetadata({
 		title: titlex,
 		artist: artistx,
