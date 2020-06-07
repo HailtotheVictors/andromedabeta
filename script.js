@@ -477,12 +477,15 @@ function updateMeta() {
 	var titlex = songList[songQueue[songIndex]][1];
 	var artistx = songList[songQueue[songIndex]][2];
 	var albumx = songList[songQueue[songIndex]][4];
-	var image = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3]
+	var url = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
+	var arg = {src: url};
+	var sys = [];
+	sys[0] = arg;
 	navigator.mediaSession.metadata = new MediaMetadata({
 		title: titlex,
 		artist: artistx,
 		album: albumx,
-		artwork: [{src: image}]
+		artwork: sys
 	});
 }
 
