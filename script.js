@@ -101,8 +101,8 @@ function goTo(page) {
 //home page scrolling
 function checkScroll(elem) {
 	var kids = elem.children;
-	kids[0].style.left = elem.scrollLeft + "px";
-	kids[1].style.left = String(elem.scrollLeft + elem.offsetWidth - 50) + "px";
+	//kids[0].style.left = elem.scrollLeft + "px";
+	//kids[1].style.left = String(elem.scrollLeft + elem.offsetWidth - 50) + "px";
 	if (Math.round(elem.scrollLeft) === (elem.scrollWidth - elem.offsetWidth) || Math.floor(elem.scrollLeft) === (elem.scrollWidth - elem.offsetWidth)) {
 		kids[1].style.display = "none";
 	} else if (elem.scrollLeft == 0) {
@@ -263,7 +263,7 @@ function updateHome() {
 function updateProgress() {
 	if (progressUpdate == -1) {
 		progressUpdate = setInterval(function() {
-			document.getElementById("songProgress").innerHTML = toMins(Math.round(audio.currentTime)) + "/" + toMins(Math.round(audio.duration));
+			document.getElementById("songProgress").innerHTML = toMins(Math.floor(audio.currentTime)) + "/" + toMins(Math.floor(audio.duration));
 			document.getElementById("scrubBar").value = audio.currentTime / audio.duration;
 			if (audio.currentTime == audio.duration) {
 				stopUpdate();
@@ -477,7 +477,7 @@ function setEQ(elem) {
 function updateMeta() {
 	var titlex = songList[songQueue[songIndex]][1];
 	var artistx = songList[songQueue[songIndex]][2];
-	var albumx = songList[songQueue[songIndex]][4];
+	var albumx = decodeEntities(songList[songQueue[songIndex]][4]);
 	var url = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
 	var arg = {src: url};
 	var sys = [];
