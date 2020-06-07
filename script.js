@@ -482,7 +482,7 @@ function updateMeta() {
 		title: titlex,
 		artist: artistx,
 		album: albumx,
-		artwork.src: image
+		artwork: [{src: image}]
 	});
 }
 
