@@ -402,6 +402,18 @@ function playPause() {
 	}
 }
 
+function moveTen(dir) {
+	var current = audio.currentTime;
+	var moveTo = current + dir * 10
+	if (moveTo < 0) {
+		moveTo = 0;
+	} else if (moveTo > audio.duration) {
+		nextSong();
+		return;
+	}
+	audio.currentTime = moveTo;
+}
+
 function scrubSong() {
 	var newVal = document.getElementById("scrubBar").value;
 	audio.currentTime = newVal * audio.duration;
@@ -456,11 +468,6 @@ function updateQueue() {
 		people[i].innerHTML = songList[songQueue[songIndex + i]][2];
 		imageParents[i].children[0].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + i]][3];
 	}
-}
-
-//library page
-function showPlaylist(num) {
-	
 }
 
 //audio and eq stuff
