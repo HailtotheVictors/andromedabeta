@@ -11,6 +11,11 @@ var playlists = [];
 var fullAlbum;
 var miniAlbum;
 
+navigator.mediaSession.setActionHandler('previoustrack',backAction);
+navigator.mediaSession.setActionHandler('nexttrack',nextSong);
+navigator.mediaSession.setActionHandler('play',playPause);
+navigator.mediaSession.setActionHandler('pause',playPause);
+
 playlists[0] = []; //all songs
 playlists[1] = [0,1,3,6,7,13,14,23,24,25,27,31,33,34,35,40,41,42,43,44,51,57,59,60,61,63]; //imagine dragons
 playlists[2] = [8,17,19,23,28,30,47,48,49,55,56,62,65]; //avicii
@@ -270,6 +275,14 @@ function updateProgress() {
 function stopUpdate() {
 	clearInterval(progressUpdate);
 	progressUpdate = -1;
+}
+
+function backAction() {
+	if (audio.currentTime < 10) {
+		prevSong();
+	} else {
+		audio.currentTime = 0;
+	}
 }
 
 function prevSong() {
