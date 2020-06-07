@@ -24,12 +24,12 @@ function conx(url) {
 		bassFilter = context.createBiquadFilter();
 		bassFilter.type = "lowshelf"; 
 		bassFilter.frequency.value = 200;  // switches to 400 in UI
-		bassFilter.gain.value = bass;  // you'll need to hook this to UI too
+		//bassFilter.gain.value = bass;  // you'll need to hook this to UI too
 
 		trebleFilter = context.createBiquadFilter();
 		trebleFilter.type = "highshelf"; 
 		trebleFilter.frequency.value = 2000;  // switches to 6000 in UI
-		trebleFilter.gain.value = treble;  // you'll need to hook this to UI too
+		//trebleFilter.gain.value = treble;  // you'll need to hook this to UI too
 
 		source.connect(bassFilter); 
 		bassFilter.connect(trebleFilter); 
