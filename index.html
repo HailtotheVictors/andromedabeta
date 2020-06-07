@@ -12,7 +12,6 @@
 	<script src="audio.js"></script>
 	<script src="swipe.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 </head>
 <body onload="init()">
 
@@ -163,79 +162,83 @@
 	</div></div> <!-- /Music Player -->
 	<div class="card"> <!-- Navigate Playlists -->
 		<span class="title">Music</span>
-		<div class="carousel" onscroll="checkScroll(this)">
-			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
-				<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
-			</svg>
-			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
-				<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
-			</svg>
-			<div class="playlist" style="background-image:url('playlists/musica.png')" onclick="viewPlaylist(0)">
-				<svg viewBox="0 0 24 24">
-					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+		<div class="carouselCont">
+			<div class="carousel" onscroll="checkScroll(this)">
+				<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
+					<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
 				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/imaginedragons.png')" onclick="viewPlaylist(1)">
-				<svg viewBox="0 0 24 24">
-					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+				<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
+					<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
 				</svg>
+				<div class="playlist" style="background-image:url('playlists/musica.png')" onclick="viewPlaylist(0)">
+					<svg viewBox="0 0 24 24">
+						<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/imaginedragons.png')" onclick="viewPlaylist(1)">
+					<svg viewBox="0 0 24 24">
+						<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/avicii.png')" onclick="viewPlaylist(2)">
+					<svg viewBox="0 0 24 24">
+						<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/milkychance.jpg')" onclick="viewPlaylist(3)">
+					<svg viewBox="0 0 24 24">
+						<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/elli.png')" onclick="viewPlaylist(4)">
+					<svg viewBox="0 0 24 24">
+						<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
+					</svg>
+				</div>
+				<div style="height:250px;width:20px;flex-shrink:0;"></div>
 			</div>
-			<div class="playlist" style="background-image:url('playlists/avicii.png')" onclick="viewPlaylist(2)">
-				<svg viewBox="0 0 24 24">
-					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
-				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/milkychance.jpg')" onclick="viewPlaylist(3)">
-				<svg viewBox="0 0 24 24">
-					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
-				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/elli.png')" onclick="viewPlaylist(4)">
-				<svg viewBox="0 0 24 24">
-					<path d="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z"/>
-				</svg>
-			</div>
-			<div style="height:250px;width:20px;flex-shrink:0;"></div>
 		</div>
 		<span class="title">Shows</span>
-		<div class="carousel" onscroll="checkScroll(this)">
-			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
-				<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
-			</svg>
-			<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
-				<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
-			</svg>
-			<div class="playlist" style="background-image:url('playlists/milo_1.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+		<div class="carouselCont">
+			<div class="carousel" onscroll="checkScroll(this)">
+				<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(-1,this)">
+					<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
 				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/milo_2.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+				<svg class="slideCarousel" viewBox="0 0 24 24" onclick="horizScroll(1,this)">
+					<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
 				</svg>
+				<div class="playlist" style="background-image:url('playlists/milo_1.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/milo_2.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/phineas_1.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/phineas_2.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/phineas_3.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div class="playlist" style="background-image:url('playlists/phineas_4.png')">
+					<svg viewBox="0 0 24 24">
+						<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
+					</svg>
+				</div>
+				<div style="height:250px;width:20px;flex-shrink:0;"></div>
 			</div>
-			<div class="playlist" style="background-image:url('playlists/phineas_1.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
-				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/phineas_2.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
-				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/phineas_3.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
-				</svg>
-			</div>
-			<div class="playlist" style="background-image:url('playlists/phineas_4.png')">
-				<svg viewBox="0 0 24 24">
-					<path d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"/>
-				</svg>
-			</div>
-			<div style="height:250px;width:20px;flex-shrink:0;"></div>
 		</div>
 	</div> <!-- /Navigate Playlists -->
 	<div class="card" style="display:none;"> <!-- playlist -->
