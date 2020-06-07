@@ -1,7 +1,7 @@
 window.onresize = setScroll;
 var songIndex = 0;
 var songQueue = [];
-var currentPlaylist = 0;
+var currentPlaylist;
 var hasPlayed = false;
 var playlistCovers = ["musica.png","imaginedragons.png","avicii.png","milkychance.jpg","elli.png"];
 var playlistNames  = ["M&uacute;sica","Imagine Dragons","Avicii","Milky Chance","Elli"];
