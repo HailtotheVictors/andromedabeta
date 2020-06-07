@@ -309,6 +309,7 @@ function newSong() {
 	document.getElementById("songName").innerHTML = songList[songQueue[songIndex]][1];
 	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2] + " | " + songList[songQueue[songIndex]][4];
 	audio.src = 'https://hailtothevictors.github.io/andromeda/AndromedaX/' + songList[songQueue[songIndex]][0] + '.mp3';
+	updateMeta();
 	audio.play();
 }
 
@@ -430,6 +431,7 @@ function playSongNow(elem) {
 	document.getElementsByClassName("albumCover")[1].src = "https://hailtothevictors.github.io/andromeda" + songList[song][3];
 	document.getElementById("songName").innerHTML = songList[song][1];
 	document.getElementById("songDesc").innerHTML = songList[song][2] + " | " + songList[song][4];
+	updateMeta();
 	updateQueue();
 }
 
@@ -471,6 +473,19 @@ function setEQ(elem) {
 }
 
 //resources
+function updateMeta() {
+	var titlex = songList[songQueue[songIndex]][1];
+	var artistx = songList[songQueue[songIndex]][2];
+	var albumx = songList[songQueue[songIndex]][4];
+	var image = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3]
+	navigator.mediaSession.metadata = new MediaMetadata({
+		title: titlex,
+		artist: artistx,
+		album: albumx,
+		artwork: [{src: image}]
+	});
+}
+
 function standardPlural(str,num) {
 	if (num == 1) {
 		return str;
