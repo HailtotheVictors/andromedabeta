@@ -125,14 +125,18 @@ body {
 	top: 60px;
 	left: 60px;
 }
-.carousel {
+.carouselCont {
 	height: 250px;
+	width: 100%;
+	background-color: #444;
+	position: relative;
+}
+.carousel {
+	height: 100%;
 	width: 100%;
 	overflow-x: auto;
 	overflow-y: auto;
-	background-color: #444;
 	display: flex;
-	position: relative;
 }
 .slideCarousel {
 	position: absolute;
