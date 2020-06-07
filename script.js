@@ -249,6 +249,8 @@ function updateHome() {
 	var index = document.getElementsByClassName("albumCover");
 	index[1].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3];
 	index[2].src = "https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex + 1]][3];
+	document.getElementById("songName").innerHTML = songList[songQueue[songIndex]][1];
+	document.getElementById("songDesc").innerHTML = songList[songQueue[songIndex]][2] + " | " + songList[songQueue[songIndex]][4];
 	document.getElementById("home").style.backgroundImage = "url('https://hailtothevictors.github.io/andromeda" + songList[songQueue[songIndex]][3] + "')";
 }
 
